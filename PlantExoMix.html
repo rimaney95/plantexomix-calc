@@ -1,0 +1,1820 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Калькулятор субстрата PlantExoMix</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,700;1,9..144,500&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root,
+[data-theme='light'] {
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Manrope', 'Helvetica Neue', sans-serif;
+
+  --color-bg: #f4f1e8;
+  --color-surface: #fbf9f3;
+  --color-surface-2: #f7f4ec;
+  --color-surface-offset: #eee9dc;
+  --color-divider: #ddd6c5;
+  --color-border: #cfc7b2;
+  --color-text: #2c2416;
+  --color-text-muted: #6f6754;
+  --color-text-faint: #a89f8a;
+  --color-text-inverse: #fbf9f3;
+  --color-primary: #b9500f;
+  --color-primary-hover: #9a400a;
+  --color-primary-highlight: #f3e2d2;
+  --color-leaf: #446e34;
+  --color-leaf-highlight: #e2e9d9;
+  --color-amber: #c07c00;
+  --color-amber-highlight: #f1e8cf;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+  --transition-interactive: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+  --shadow-sm: 0 1px 2px rgba(44, 36, 22, 0.07);
+  --shadow-md: 0 4px 14px rgba(44, 36, 22, 0.09);
+  --shadow-lg: 0 12px 32px rgba(44, 36, 22, 0.13);
+
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+  --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem;
+}
+
+[data-theme='dark'] {
+  --color-bg: #16140f;
+  --color-surface: #1d1a14;
+  --color-surface-2: #211e17;
+  --color-surface-offset: #282418;
+  --color-divider: #2e2a20;
+  --color-border: #413a2b;
+  --color-text: #e5e0d4;
+  --color-text-muted: #a39a85;
+  --color-text-faint: #6b6353;
+  --color-text-inverse: #1d1a14;
+  --color-primary: #ef8d4d;
+  --color-primary-hover: #f5a56b;
+  --color-primary-highlight: #40301f;
+  --color-leaf: #8db46f;
+  --color-leaf-highlight: #2f3625;
+  --color-amber: #e0b04a;
+  --color-amber-highlight: #3d341f;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.25);
+  --shadow-md: 0 4px 14px rgba(0,0,0,0.35);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.45);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-bg: #16140f;
+    --color-surface: #1d1a14;
+    --color-surface-2: #211e17;
+    --color-surface-offset: #282418;
+    --color-divider: #2e2a20;
+    --color-border: #413a2b;
+    --color-text: #e5e0d4;
+    --color-text-muted: #a39a85;
+    --color-text-faint: #6b6353;
+    --color-text-inverse: #1d1a14;
+    --color-primary: #ef8d4d;
+    --color-primary-hover: #f5a56b;
+    --color-primary-highlight: #40301f;
+    --color-leaf: #8db46f;
+    --color-leaf-highlight: #2f3625;
+    --color-amber: #e0b04a;
+    --color-amber-highlight: #3d341f;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.25);
+    --shadow-md: 0 4px 14px rgba(0,0,0,0.35);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.45);
+  }
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.6;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  background-image: radial-gradient(circle at 15% 0%, var(--color-surface-offset) 0%, transparent 55%),
+                    radial-gradient(circle at 100% 100%, var(--color-surface-offset) 0%, transparent 45%);
+}
+
+h1, h2, h3 { line-height: 1.15; text-wrap: balance; }
+p, li { text-wrap: pretty; max-width: 72ch; }
+
+img, svg { display: block; max-width: 100%; }
+input, button, select { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: none; }
+ul[role='list'], ol[role='list'] { list-style: none; }
+table { border-collapse: collapse; width: 100%; }
+
+::selection { background: var(--color-primary); color: var(--color-text-inverse); }
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
+a, button, input, select {
+  transition: color var(--transition-interactive),
+              background var(--transition-interactive),
+              border-color var(--transition-interactive),
+              box-shadow var(--transition-interactive);
+}
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-divider);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.brand small {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.theme-toggle {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-full);
+  display: grid;
+  place-items: center;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+}
+.theme-toggle:hover { color: var(--color-primary); box-shadow: var(--shadow-sm); }
+
+/* ---------- Layout ---------- */
+.wrap {
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+main { padding-block: var(--space-10) var(--space-16); }
+
+.hero { padding-block: var(--space-8) var(--space-10); }
+.hero .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background: var(--color-primary-highlight);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-5);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  max-width: 26ch;
+}
+.hero .lede {
+  margin-top: var(--space-4);
+  color: var(--color-text-muted);
+  font-size: var(--text-lg);
+  max-width: 58ch;
+}
+
+section { margin-top: var(--space-12); }
+section > .section-head { margin-bottom: var(--space-6); }
+.section-head h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+}
+.section-head p {
+  margin-top: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  max-width: 62ch;
+}
+
+/* ---------- Cards / grid ---------- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+@media (max-width: 860px) { .grid-2 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-pad { padding: var(--space-6); }
+
+.card h3 {
+  font-size: var(--text-base);
+  font-weight: 700;
+  margin-bottom: var(--space-2);
+}
+
+.card .hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-5);
+}
+
+/* ---------- Controls ---------- */
+.range-row {
+  display: grid;
+  grid-template-columns: 1fr 84px;
+  align-items: center;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+}
+.range-row label {
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+.range-row output {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-primary);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: linear-gradient(to right,
+    var(--color-primary) 0%,
+    var(--color-primary) var(--fill, 50%),
+    var(--color-surface-offset) var(--fill, 50%),
+    var(--color-surface-offset) 100%);
+  outline-offset: 4px;
+  margin-block: var(--space-2);
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  border: 3px solid var(--color-primary);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+}
+input[type='range']::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface);
+  border: 3px solid var(--color-primary);
+  box-shadow: var(--shadow-sm);
+  cursor: grab;
+}
+
+.mode-row { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.mode-btn {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+}
+.mode-btn:hover { border-color: var(--color-primary); color: var(--color-text); }
+.mode-btn[aria-pressed='true'] {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: 700;
+}
+
+/* plant selector */
+.plant-chips { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.plant-chip {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+  color: var(--color-text-muted);
+}
+.plant-chip:hover { border-color: var(--color-primary); color: var(--color-text); }
+.plant-chip[aria-pressed='true'] {
+  background: var(--color-leaf);
+  border-color: var(--color-leaf);
+  color: var(--color-text-inverse);
+  font-weight: 700;
+}
+.plant-desc {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-leaf-highlight);
+  border-left: 3px solid var(--color-leaf);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+.plant-desc .latin {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin-bottom: var(--space-1);
+}
+
+/* component checkboxes */
+.comp-list { display: grid; gap: var(--space-2); }
+
+.comp {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  cursor: pointer;
+}
+.comp:hover { border-color: var(--color-primary); }
+.comp:has(input:checked) {
+  border-color: var(--color-primary);
+  background: var(--color-primary-highlight);
+}
+.comp input {
+  accent-color: var(--color-primary);
+  width: 17px;
+  height: 17px;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.comp .name {
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+.comp .role-tag {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+.comp input:focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: 3px; }
+
+/* ---------- Result ---------- */
+.result-stack { display: grid; gap: var(--space-6); }
+
+.kv {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+.kv .cell {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-divider);
+}
+.kv .num {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
+}
+.kv .cap {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+@media (max-width: 640px) { .kv { gap: var(--space-2); } .kv .cell { padding: var(--space-3); } }
+
+.profiles {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--color-border);
+  background: var(--color-surface-2);
+}
+.profiles .p-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 120px;
+  gap: var(--space-3);
+  align-items: center;
+}
+.profiles .p-name {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.bar {
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-offset);
+  overflow: hidden;
+}
+.bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: var(--radius-full);
+  background: linear-gradient(90deg, var(--color-primary), var(--color-amber));
+  transition: width 500ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.profiles .p-liters {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 640px) {
+  .profiles .p-row { grid-template-columns: 1fr 80px; }
+  .bar { grid-column: 1 / -1; order: 3; }
+}
+
+.mix-table { overflow-x: auto; }
+.mix-table table { min-width: 520px; }
+.mix-table th {
+  text-align: left;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 2px solid var(--color-divider);
+}
+.mix-table td {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-divider);
+  font-size: var(--text-sm);
+  vertical-align: top;
+}
+.mix-table tr:last-child td { border-bottom: none; }
+.mix-table .comp-name { font-weight: 700; white-space: nowrap; }
+.mix-table .pct {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+.mix-table .lit { font-variant-numeric: tabular-nums; color: var(--color-text-muted); white-space: nowrap; }
+.mix-table .frac { color: var(--color-text-muted); font-size: var(--text-xs); white-space: nowrap; }
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  margin-right: var(--space-2);
+  vertical-align: baseline;
+}
+
+.ph-note {
+  margin-top: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-leaf-highlight);
+  border-left: 3px solid var(--color-leaf);
+  font-size: var(--text-sm);
+}
+
+.warn-box {
+  margin-top: var(--space-4);
+  display: grid;
+  gap: var(--space-2);
+}
+.warn-box .w {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-amber-highlight);
+  border-left: 3px solid var(--color-amber);
+  font-size: var(--text-sm);
+}
+
+/* watering card */
+.water-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+.w-cell {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-divider);
+  text-align: center;
+}
+.w-cell.hot { border-color: color-mix(in srgb, var(--color-primary) 50%, var(--color-divider)); }
+.w-cell.active {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  background: var(--color-primary-highlight);
+}
+.w-cell .days {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-primary);
+  font-variant-numeric: tabular-nums;
+}
+.w-cell .cond { font-size: var(--text-xs); color: var(--color-text-muted); margin-top: var(--space-1); }
+
+.water-output {
+  margin-top: var(--space-5);
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--color-primary-highlight);
+  border: 1px solid color-mix(in srgb, var(--color-primary) 35%, transparent);
+}
+.water-output .big {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-primary);
+}
+.water-output .sub {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+}
+
+.water-rules {
+  margin-top: var(--space-5);
+  display: grid;
+  gap: var(--space-3);
+}
+.water-rules li {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  padding-left: var(--space-5);
+  position: relative;
+}
+.water-rules li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-leaf);
+}
+
+/* roles */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-4);
+  align-items: start;
+}
+.role-card {
+  padding: 0;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-divider);
+  background: var(--color-surface);
+}
+.role-card h3 {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+.role-card h3 .share {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-primary-highlight);
+  padding: 1px var(--space-3);
+  border-radius: var(--radius-full);
+  font-variant-numeric: tabular-nums;
+}
+.role-card h3 .share.off {
+  opacity: .55;
+  background: var(--color-surface-offset);
+  color: var(--color-text-faint);
+}
+.role-card summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  cursor: pointer;
+  list-style: none;
+}
+.role-card summary::-webkit-details-marker { display: none; }
+.role-card summary::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--color-text-muted);
+  border-bottom: 2px solid var(--color-text-muted);
+  transform: rotate(45deg);
+  margin-bottom: 3px;
+  transition: transform var(--transition-interactive);
+}
+.role-card[open] summary::after { transform: rotate(-135deg); margin-bottom: -3px; }
+.role-card summary:hover h3 { color: var(--color-primary); }
+.role-card summary:focus-visible { outline: 2px solid var(--color-primary); outline-offset: -2px; border-radius: var(--radius-md); }
+.role-card[open] { border-color: color-mix(in srgb, var(--color-primary) 40%, var(--color-divider)); }
+.role-card p {
+  padding: 0 var(--space-5) var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+/* recipe text */
+.recipe-text {
+  margin-top: var(--space-5);
+  display: grid;
+  gap: var(--space-3);
+}
+.recipe-text pre {
+  background: var(--color-surface-offset);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.copy-btn {
+  justify-self: start;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: var(--color-text-inverse);
+  box-shadow: var(--shadow-sm);
+}
+.copy-btn:hover { background: var(--color-primary-hover); }
+
+/* sources */
+.sources {
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-divider);
+}
+.sources h2 {
+  font-size: var(--text-base);
+  font-weight: 700;
+  margin-bottom: var(--space-3);
+}
+.sources li {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+}
+.sources a { color: var(--color-text-muted); text-decoration: underline; text-underline-offset: 3px; }
+.sources a:hover { color: var(--color-primary); }
+
+footer {
+  padding-block: var(--space-8);
+  border-top: 1px solid var(--color-divider);
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+.plant-chips{max-height:14rem;overflow-y:auto;padding:2px}
+.plant-group{flex:1 1 100%;border:1px solid var(--color-border,#ccc);border-radius:10px;padding:6px 10px}
+.plant-group>summary{cursor:pointer;font-weight:600;padding:4px 0}
+.plant-group-list{display:flex;flex-wrap:wrap;gap:var(--space-2,8px);padding:6px 0 4px}
+.num-input,.search-row input{width:100%;padding:var(--space-3) var(--space-4);border:1px solid var(--color-border);border-radius:var(--radius-full);background:var(--color-surface-2)}
+.search-row{margin-bottom:var(--space-3)}
+.header-actions{display:flex;align-items:center;gap:var(--space-3)}
+.channel-btn{font-size:var(--text-sm);font-weight:700;padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);border:1px solid var(--color-leaf);color:var(--color-leaf);text-decoration:none;white-space:nowrap}
+.channel-btn:hover{background:var(--color-leaf);color:var(--color-text-inverse)}
+.cta{display:grid;gap:var(--space-3);background:var(--color-leaf-highlight);border-left:3px solid var(--color-leaf)}
+.cta p{font-size:var(--text-sm)}
+.cta a.btn{justify-self:start;font-size:var(--text-sm);font-weight:700;padding:var(--space-3) var(--space-5);border-radius:var(--radius-full);background:var(--color-leaf);color:var(--color-text-inverse);text-decoration:none}
+.ev{font-size:var(--text-xs);font-weight:700;padding:1px var(--space-3);border-radius:var(--radius-full);white-space:nowrap}
+.ev-data{background:var(--color-leaf-highlight);color:var(--color-leaf)}
+.ev-prac{background:var(--color-amber-highlight);color:var(--color-amber)}
+.ev-legend{display:flex;gap:var(--space-3);flex-wrap:wrap;margin-top:var(--space-3);font-size:var(--text-xs);color:var(--color-text-muted);align-items:center}
+.profiles .p-row{grid-template-columns:200px minmax(0,1fr) 90px}
+.profiles .p-name{white-space:normal;line-height:1.25}
+.profiles .p-name small{display:block;font-weight:500;color:var(--color-text-muted);font-size:var(--text-xs);margin-top:2px}
+@media (max-width:640px){.profiles .p-row{grid-template-columns:minmax(0,1fr) 80px}}
+.water-factors{display:grid;gap:var(--space-2);margin-bottom:var(--space-4)}
+.wf-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--space-3);align-items:baseline;padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);background:var(--color-surface-2);border:1px solid var(--color-divider);font-size:var(--text-sm)}
+.wf-row small{display:block;color:var(--color-text-muted);font-size:var(--text-xs)}
+.wf-row b{font-variant-numeric:tabular-nums;color:var(--color-primary);white-space:nowrap}
+.wf-note{font-size:var(--text-xs);color:var(--color-text-muted);margin-bottom:var(--space-1)}
+.wf-row.total{border-color:var(--color-primary)}
+.sources summary{display:flex;align-items:center;justify-content:space-between;gap:var(--space-3);cursor:pointer;list-style:none;padding-block:var(--space-3)}
+.sources summary::-webkit-details-marker{display:none}
+.sources summary::after{content:'';flex:none;width:8px;height:8px;border-right:2px solid var(--color-text-muted);border-bottom:2px solid var(--color-text-muted);transform:rotate(45deg);margin-bottom:3px;transition:transform var(--transition-interactive)}
+.sources details[open]>summary::after{transform:rotate(-135deg);margin-bottom:-3px}
+.sources summary:hover{color:var(--color-primary)}
+.sources summary:focus-visible{outline:2px solid var(--color-primary);outline-offset:2px;border-radius:var(--radius-sm)}
+.sources summary h2{margin-bottom:0}
+.sources .src-group{border-top:1px solid var(--color-divider)}
+.sources .src-group>summary{font-size:var(--text-sm);font-weight:700}
+.sources .src-group>ul{padding-bottom:var(--space-3)}
+.sources .src-note{margin-top:var(--space-4);padding:var(--space-4);border-radius:var(--radius-md);background:var(--color-amber-highlight);border-left:3px solid var(--color-amber);font-size:var(--text-xs);color:var(--color-text)}
+.grid-2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.grid-2>*,.result-stack>*{min-width:0}
+@media (max-width:860px){.grid-2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){
+  .wrap,.header-inner{padding-inline:16px}
+  .card-pad{padding:var(--space-4)}
+  .mix-table table{min-width:0}
+  .mix-table th,.mix-table td{padding:var(--space-2) var(--space-2)}
+  .mix-table .comp-name,.mix-table .lit,.mix-table .frac,.mix-table .pct{white-space:normal}
+  .roles-grid{grid-template-columns:minmax(0,1fr)}
+  .range-row{grid-template-columns:1fr auto}
+  .hero{padding-block:var(--space-4) var(--space-6)}
+  main{padding-block:var(--space-6) var(--space-12)}
+  .profiles .p-name{white-space:normal}
+}
+@media (max-width:480px){.channel-btn{padding:var(--space-2) var(--space-3)}.brand small{display:none}}
+</style>
+<header class="site-header">
+  <div class="header-inner">
+    <div class="brand">
+      <svg width="34" height="34" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="15" fill="var(--color-primary)"/>
+        <path d="M16 25c0 0 8-5.5 8-12.5C24 7 20.7 4 16 4s-8 3-8 8.5C8 19.5 16 25 16 25z" fill="var(--color-amber)"/>
+        <rect x="14.5" y="11" width="3" height="14" rx="1.5" fill="#2c2416"/>
+      </svg>
+      <span>PlantExoMix
+        <small>Калькулятор субстрата · v3.1</small>
+      </span>
+    </div>
+    <div class="header-actions">
+    <a class="channel-btn" href="https://t.me/PlantExoMix" target="_blank" rel="noopener">Канал автора</a>
+    <button class="theme-toggle" data-theme-toggle aria-label="Переключить тёмную тему"></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Субстрат под ваше растение и ваши компоненты</h1>
+    <p class="lede">Найдите растение по роду, выберите органический или минеральный грунт, способ полива и объём горшка. Калькулятор покажет пропорции и объёмы. Каждый компонент помечен: его свойство подтверждено измерениями или это практика коллекционеров.</p>
+  </div>
+
+  <!-- ============ КАЛЬКУЛЯТОР ============ -->
+  <section id="calc" aria-label="Калькулятор">
+    <div class="section-head">
+      <h2>Калькулятор</h2>
+      <p>Выберите растение, настройте режим и объём горшка, отметьте компоненты, которые у вас есть. Результат пересчитывается мгновенно.</p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Левая колонка: настройки -->
+      <div class="result-stack">
+        <div class="card card-pad">
+          <h3>Растение</h3>
+          <p class="hint">Требования растений к субстрату взяты из университетских служб (NC State, UF/IFAS, Wisconsin) и RHS. Точных научно обоснованных процентов для комнатных растений не существует: пропорции здесь стартовые, их подбирают под свои условия.</p>
+          <div class="search-row"><input type="search" id="plantSearch" placeholder="Поиск по роду: монстера, hoya, ficus…" aria-label="Поиск растения по роду" autocomplete="off"></div>
+          <div class="plant-chips" id="plantChips" role="group" aria-label="Выбор растения"></div>
+          <div class="plant-desc" id="plantDesc"></div>
+        </div>
+
+        <div class="card card-pad">
+          <h3>Тип грунта и полив</h3>
+          <p class="hint">Органический субстрат: кора, кокос, грунт. Минеральный: глиняные гранулы Seramis, пемза, лава. Фитиль подаёт воду снизу из резервуара. В закрытом горшке лишняя вода не уходит, поэтому поливают реже и меньшим объёмом.</p>
+          <div class="mode-row" role="group" aria-label="Тип грунта">
+            <button class="mode-btn" id="soilOrg" aria-pressed="true" onclick="setSoil('org')">Органический субстрат</button>
+            <button class="mode-btn" id="soilMin" aria-pressed="false" onclick="setSoil('min')">Минеральный грунт</button>
+          </div>
+          <div class="mode-row" style="margin-top:var(--space-3)" role="group" aria-label="Способ полива">
+            <button class="mode-btn" id="waterTop" aria-pressed="true" onclick="setWick(false)">Полив сверху</button>
+            <button class="mode-btn" id="waterWick" aria-pressed="false" onclick="setWick(true)">Фитильный полив</button>
+          </div>
+          <div class="mode-row" style="margin-top:var(--space-3)" role="group" aria-label="Тип горшка">
+            <button class="mode-btn" id="potOpen" aria-pressed="true" onclick="setClosed(false)">Горшок с отверстиями</button>
+            <button class="mode-btn" id="potClosed" aria-pressed="false" onclick="setClosed(true)">Закрытый горшок без отверстий</button>
+          </div>
+        </div>
+
+        <div class="card card-pad">
+          <h3>Режим смеси</h3>
+          <p class="hint">База, практический оптимум для выбранного растения: питание и влага в балансе с быстрым просыханием.</p>
+          <div class="mode-row" role="group" aria-label="Режим смеси">
+            <button class="mode-btn" id="modeDrain" aria-pressed="false" onclick="setMode('drain')">Максимальный дренаж</button>
+            <button class="mode-btn" id="modeBase" aria-pressed="true" onclick="setMode('base')">Базовый</button>
+            <button class="mode-btn" id="modeRetain" aria-pressed="false" onclick="setMode('retain')">Больше влаги</button>
+          </div>
+        </div>
+
+        <div class="card card-pad">
+          <h3>Условия содержания</h3>
+          <p class="hint">Свет меняет и состав смеси, и полив. Температура, влажность воздуха и объём горшка влияют на интервал полива.</p>
+
+          <div class="range-row">
+            <label>Объём горшка</label>
+            <output id="potOut">3 л</output>
+          </div>
+          <div class="plant-chips" id="potChips" role="group" aria-label="Объём горшка"></div>
+          <input type="number" id="potCustom" class="num-input" min="0.05" max="200" step="0.05" placeholder="Свой объём, л" aria-label="Свой объём горшка в литрах" style="margin-block:var(--space-3) var(--space-2)">
+
+          <div class="range-row">
+            <label for="lightLevel">Освещённость</label>
+            <output id="lightOut" for="lightLevel">яркое</output>
+          </div>
+          <input type="range" id="lightLevel" min="0" max="2" step="1" value="2"
+                 aria-label="Освещённость">
+
+          <div class="range-row">
+            <label for="tempLevel">Температура</label>
+            <output id="tempOut" for="tempLevel">20–24 °C</output>
+          </div>
+          <input type="range" id="tempLevel" min="0" max="3" step="1" value="1"
+                 aria-label="Температура воздуха">
+
+          <div class="range-row">
+            <label for="humLevel">Влажность воздуха</label>
+            <output id="humOut" for="humLevel">50%</output>
+          </div>
+          <input type="range" id="humLevel" min="0" max="6" step="1" value="2"
+                 aria-label="Влажность воздуха, от 30 до 90 процентов">
+        </div>
+
+        <div class="card card-pad">
+          <h3>Ваши компоненты</h3>
+          <p class="hint">Отметьте компоненты, которые у вас есть. Смесь посчитается только из них: доля недостающих перераспределится внутри той же функциональной группы.</p>
+          <div class="comp-list" id="compList"></div>
+        </div>
+      </div>
+
+      <!-- Правая колонка: результат -->
+      <div class="result-stack" aria-live="polite">
+        <div class="card card-pad">
+          <div class="kv">
+            <div class="cell">
+              <div class="num" id="kvAir">—</div>
+              <div class="cap">минеральные компоненты</div>
+            </div>
+            <div class="cell">
+              <div class="num" id="kvMoist">—</div>
+              <div class="cap">органические компоненты</div>
+            </div>
+            <div class="cell">
+              <div class="num" id="kvStruct">—</div>
+              <div class="cap">всего смеси</div>
+            </div>
+          </div>
+          <div class="profiles" style="margin-top: var(--space-5);">
+            <div class="p-row">
+              <span class="p-name">Дренаж<small>перлит, пемза, лава, песок</small></span>
+              <span class="bar"><i id="barDrain"></i></span>
+              <span class="p-liters" id="litDrain">—</span>
+            </div>
+            <div class="p-row">
+              <span class="p-name">Держат воду и питание<small>грунт, кокос, сфагнум, биогумус</small></span>
+              <span class="bar"><i id="barMoist"></i></span>
+              <span class="p-liters" id="litMoist">—</span>
+            </div>
+            <div class="p-row">
+              <span class="p-name">Крупная кора и волокно<small>кора 5–15 мм, триферн</small></span>
+              <span class="bar"><i id="barStruct"></i></span>
+              <span class="p-liters" id="litStruct">—</span>
+            </div>
+            <div class="p-row">
+              <span class="p-name">Добавки<small>уголь, цеолит, диатомит, мелкая кора</small></span>
+              <span class="bar"><i id="barBuffer"></i></span>
+              <span class="p-liters" id="litBuffer">—</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-pad">
+          <h3>Ваши компоненты на <span id="potTitle">10 л</span>: <span id="recipePlant">стрелиция</span></h3>
+          <div class="mix-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Компонент</th>
+                  <th>Доля</th>
+                  <th>Сколько взять<br><span style="font-weight:500;text-transform:none;letter-spacing:0">стакан 250 мл</span></th>
+                </tr>
+              </thead>
+              <tbody id="mixBody"></tbody>
+            </table>
+          </div>
+          <div class="warn-box" id="warnBox" hidden></div>
+          <div class="ph-note" id="phNote"></div>
+        </div>
+
+        <div class="card card-pad cta">
+          <h3>Откуда эти рецепты</h3>
+          <p>Калькулятор сделан и для новичков, и для профессионалов. Рецепты сначала проверяю на своих растюхах: 50+ видов алоказий, монстеры, антуриумы. В канале объясняю, что за ними стоит, со ссылками на исследования.</p>
+          <a class="btn" href="https://t.me/PlantExoMix" target="_blank" rel="noopener">Читать канал PlantExoMix</a>
+        </div>
+
+        <div class="card card-pad">
+          <h3 id="waterTitle">Частота полива</h3>
+          <p class="hint">Оценка, а не измерение: учитывает растение, свет, температуру, влажность воздуха, объём горшка и состав вашей смеси (влагоёмкость и воздушность). Исследований с точными интервалами полива для комнатных растений нет. Перед поливом проверяйте влажность смеси пальцем или деревянной палочкой.</p>
+          <div class="water-factors" id="waterFactors"></div>
+          <div class="water-grid" id="waterGrid"></div>
+          <div class="water-output">
+            <div class="big" id="waterBig">—</div>
+            <div class="sub" id="waterSub">—</div>
+          </div>
+          <ul class="water-rules" role="list" id="waterRules"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ РОЛИ КОМПОНЕНТОВ ============ -->
+  <section id="roles" aria-label="Роль каждого компонента">
+    <div class="section-head">
+      <h2>Роль каждого компонента</h2>
+      <p>Зачем каждый компонент в смеси и что будет, если сильно изменить его долю. Свойства материалов (пористость, ионный обмен, pH) измерены в исследованиях субстратов. Влияние на конкретные ароидные почти не изучено, такие утверждения помечены как практика.</p>
+      <div class="ev-legend"><span class="ev ev-data">измерено</span> свойство материала подтверждено данными <span class="ev ev-prac">практика</span> опыт коллекционеров, исследований нет</div>
+    </div>
+    <div class="roles-grid" id="rolesGrid"></div>
+  </section>
+
+  <!-- ============ РЕЦЕПТ ТЕКСТОМ ============ -->
+  <section id="recipe" aria-label="Текст рецепта">
+    <div class="section-head">
+      <h2>Рецепт текстом для заметок</h2>
+      <p>Готовая формулировка под текущие настройки, можно скопировать в заметки о растении.</p>
+    </div>
+    <div class="recipe-text">
+      <button class="copy-btn" id="copyBtn" onclick="copyRecipe()">Скопировать рецепт</button>
+      <pre id="recipePre">—</pre>
+    </div>
+  </section>
+
+  <div class="sources">
+    <details class="src-main">
+      <summary><h2>Источники</h2></summary>
+      <details class="src-group">
+        <summary><h3>Университетские службы, ботанические организации, научные публикации</h3></summary>
+        <ul role="list">
+      <li>University of Arkansas, Division of Agriculture: <a href="https://greenhouse.hosted.uark.edu/Unit07/Printer_Friendly.html" target="_blank" rel="noopener">Unit 07: Substrates</a>. Воздушное пространство и влагоёмкость: торф 10–15% и 60–68%, компостированная кора около 20% и 60%, перлит 25% и 38%, кокос 9,5–12,5% и 73–80%. На них опирается расчёт полива. Для остальных компонентов значения мои оценки, поправки на влажность воздуха и объём горшка тоже оценки, не измерения.</li>
+      <li>Wisconsin Horticulture Extension: <a href="https://hort.extension.wisc.edu/articles/bird-of-paradise-strelitzia-reginae/" target="_blank" rel="noopener">Bird of Paradise, Strelitzia reginae</a>. Дренированный субстрат, просушка между поливами.</li>
+      <li>NC State Extension Plant Toolbox, папоротники: <a href="https://plants.ces.ncsu.edu/plants/nephrolepis-exaltata/common-name/bostonfern/" target="_blank" rel="noopener">Nephrolepis exaltata</a>, <a href="https://plants.ces.ncsu.edu/plants/adiantum-raddianum/" target="_blank" rel="noopener">Adiantum raddianum</a>, <a href="https://plants.ces.ncsu.edu/plants/platycerium-bifurcatum/" target="_blank" rel="noopener">Platycerium bifurcatum</a>, <a href="https://plants.ces.ncsu.edu/plants/davallia-fejeensis/" target="_blank" rel="noopener">Davallia fejeensis</a>, <a href="https://plants.ces.ncsu.edu/plants/phlebodium-aureum/" target="_blank" rel="noopener">Phlebodium aureum</a>, <a href="https://plants.ces.ncsu.edu/plants/cyrtomium-falcatum/" target="_blank" rel="noopener">Cyrtomium falcatum</a>. Свет, влажность почвы и воздуха, субстрат.</li>
+      <li>UF/IFAS Extension: <a href="https://ask.ifas.ufl.edu/publication/FP054" target="_blank" rel="noopener">Asplenium nidus: Bird's Nest Fern</a> (тень, влажная органическая почва, эпифитный рост) и <a href="https://gardeningsolutions.ifas.ufl.edu/plants/ornamentals/staghorn-fern/" target="_blank" rel="noopener">Staghorn Ferns</a> (полив, монтаж, температура, подкормка).</li>
+      <li>NC State Extension Plant Toolbox: <a href="https://plants.ces.ncsu.edu/plants/stromanthe-thalia/" target="_blank" rel="noopener">Stromanthe thalia</a>, <a href="https://plants.ces.ncsu.edu/plants/aloe-vera/" target="_blank" rel="noopener">Aloe vera</a>, <a href="https://plants.ces.ncsu.edu/plants/chamaedorea-elegans/" target="_blank" rel="noopener">Chamaedorea elegans</a>, <a href="https://plants.ces.ncsu.edu/plants/howea-forsteriana/" target="_blank" rel="noopener">Howea forsteriana</a>, <a href="https://plants.ces.ncsu.edu/plants/dypsis-lutescens/" target="_blank" rel="noopener">Dypsis lutescens</a>, <a href="https://plants.ces.ncsu.edu/plants/begonia-rex-types/" target="_blank" rel="noopener">Begonia (Rex types)</a>, <a href="https://plants.ces.ncsu.edu/plants/yucca-gigantea/" target="_blank" rel="noopener">Yucca gigantea</a>. Свет, полив, субстрат, влажность воздуха, токсичность.</li>
+      <li>UF/IFAS Extension Nassau County: <a href="https://blogs.ifas.ufl.edu/nassauco/2017/06/10/fact-sheet-sansevieria-trifasciata/" target="_blank" rel="noopener">Sansevieria trifasciata</a>. Не лить воду в центр розетки, переполив ведёт к гнили корней.</li>
+      <li>NC State Extension Plant Toolbox: <a href="https://plants.ces.ncsu.edu/plants/washingtonia-robusta/" target="_blank" rel="noopener">Washingtonia robusta</a>. Свет, почва, полив, засухоустойчивость, дефицит калия.</li>
+      <li>International Carnivorous Plant Society: <a href="https://www.carnivorousplants.org/grow/guides/DionaeaChecklist" target="_blank" rel="noopener">Checklist for Growing Dionaea muscipula</a>. Смесь 50% торфа и 50% песка, чистая вода, поддон, без удобрений.</li>
+      <li>New York Botanical Garden, Research Guides: <a href="https://libguides.nybg.org/c.php?g=654975&p=4597429" target="_blank" rel="noopener">Venus Flytrap</a>, <a href="https://libguides.nybg.org/c.php?g=654975&p=4597450" target="_blank" rel="noopener">American Pitcher Plant (Sarracenia)</a>. Смесь, вода, свет, зимний покой.</li>
+      <li>Mid-Atlantic Carnivorous Plant Society: <a href="https://www.macpsociety.com/american-pitcher-plant-sarracenia" target="_blank" rel="noopener">American Pitcher Plant (Sarracenia)</a>. Смесь, поддон, зимовка, тип горшка.</li>
+      <li>RHS, папоротники: <a href="https://www.rhs.org.uk/plants/20650/adiantum-raddianum/details" target="_blank" rel="noopener">Adiantum raddianum</a> и <a href="https://www.rhs.org.uk/plants/100589/pteris-cretica/details" target="_blank" rel="noopener">Pteris cretica</a>. Влажная дренированная почва, высокая влажность воздуха, тень или рассеянный свет.</li>
+      <li>University of Minnesota Extension: <a href="https://extension.umn.edu/houseplants/tropical-ferns" target="_blank" rel="noopener">Tropical ferns</a>. Органическая пористая влагоёмкая смесь, тёплая вода, не жёсткая, подкормка вполсилы. Адиантум и платицериум названы сложными в уходе.</li>
+      <li>RHS: <a href="https://www.rhs.org.uk/plants/anthuriums/how-to-grow-anthuriums" target="_blank" rel="noopener">How to grow anthuriums</a>. Открытая быстросохнущая кислая смесь, мягкая вода.</li>
+      <li>RHS: <a href="https://www.rhs.org.uk/plants/philodendron/growing-guide" target="_blank" rel="noopener">Philodendron growing guide</a>. Влагоёмкий, но свободно дренированный компост.</li>
+      <li>NC State Extension: <a href="https://plants.ces.ncsu.edu/plants/monstera-deliciosa/" target="_blank" rel="noopener">Monstera deliciosa</a>. Дренаж и равномерная влажность.</li>
+      <li>RHS: <a href="https://www.rhs.org.uk/plants/alocasia/growing-guide" target="_blank" rel="noopener">How to grow alocasia</a>. Влажно, но дренированно, зимой суше и прохладнее.</li>
+      <li>UF/IFAS Extension: <a href="https://ask.ifas.ufl.edu/publication/EP159" target="_blank" rel="noopener">Cultural Guidelines for Acclimatized Foliage Plants</a>. Антуриум в смеси торф, перлит, кора 1:1:1.</li>
+      <li>RHS: <a href="https://www.rhs.org.uk/plants/hoya/how-to-grow" target="_blank" rel="noopener">How to grow hoya</a>. Кора, мультигрунт и перлит, небольшой горшок, зимой суше.</li>
+      <li>NC State Extension: <a href="https://plants.ces.ncsu.edu/plants/epipremnum-aureum/common-name/devils-vine" target="_blank" rel="noopener">Epipremnum aureum</a>. Дренированная среда, просыхание между поливами.</li>
+      <li>RHS: <a href="https://www.rhs.org.uk/plants/91403/epipremnum-aureum/details" target="_blank" rel="noopener">Epipremnum aureum</a>. Ядовит при поедании, раздражает кожу.</li>
+      <li>Alocasia reginula: <a href="https://en.wikipedia.org/wiki/Alocasia_reginula" target="_blank" rel="noopener">описание вида</a>. Известна только с сухих затенённых известняковых скал (Сабах).</li>
+      <li>Alocasia melo: <a href="https://en.wikipedia.org/wiki/Alocasia_melo" target="_blank" rel="noopener">описание вида</a>. Растёт на ультраосновных породах (Сабах).</li>
+      <li>Alocasia sinuata: <a href="https://en.wikipedia.org/wiki/Alocasia_sinuata" target="_blank" rel="noopener">описание вида</a> и <a href="https://jardinerongsunog.blogspot.com/2020/06/alocasia-sinuata-in-wild.html" target="_blank" rel="noopener">наблюдение в природе</a>. Эндемик известняковых лесов Самара, Лейте, Минданао.</li>
+      <li>Aroidpedia: <a href="https://www.aroidpedia.com/archive/alocasia-cuprea" target="_blank" rel="noopener">A. cuprea</a> (склоны на песчанике, известняке и ультраосновных породах) и <a href="https://www.aroidpedia.com/journal/alocasia-scalprum" target="_blank" rel="noopener">A. scalprum</a> (экология в природе неизвестна).</li>
+      <li>Aroidpedia: <a href="https://www.aroidpedia.com/alocasia" target="_blank" rel="noopener">Alocasia</a> и <a href="https://www.aroidpedia.com/archive/alocasia-baginda" target="_blank" rel="noopener">A. baginda</a>. Многие виды Борнео и Филиппин связаны с карстовыми известняками; местообитание A. baginda в природе пока не установлено, она близка к A. melo и A. reginula.</li>
+      <li>CITES: <a href="https://cites.org/eng/virtual-college/new-zealand-non-detriment-finding-tree-ferns-cyathea-alsophila-sphaeropteris-spp" target="_blank" rel="noopener">Non-detriment finding for tree ferns</a>. Древовидные папоротники Cyathea, Alsophila, Sphaeropteris входят в списки CITES, торговля ими контролируется.</li>
+    </ul>
+      </details>
+      <details class="src-group">
+        <summary><h3>Практика, производители, популярные гайды</h3></summary>
+        <ul role="list">
+      <li>GrowTropicals: <a href="https://growtropicals.com/blogs/houseplant-care-a-z/alocasia-houseplant-care-guide" target="_blank" rel="noopener">Alocasia Care Guide</a>.</li>
+      <li>The Plant Manual: <a href="https://www.theplantmanual.com/best-soil-for-monstera/" target="_blank" rel="noopener">Best Soil for Monstera</a>.</li>
+      <li>The Spruce: <a href="https://www.thespruce.com/grow-philodendron-houseplants-1902768" target="_blank" rel="noopener">How to Grow and Care for Philodendrons</a>.</li>
+      <li>Цветы дома: <a href="https://tsvetydoma.ru/strelitzia-reginae/" target="_blank" rel="noopener">Стрелиция: выращивание и уход</a>.</li>
+      <li>Т—Ж: <a href="https://t-j.ru/strelitzia/" target="_blank" rel="noopener">Как я выращиваю стрелицию</a>.</li>
+      <li>Seramis, карточка у ритейлера: <a href="https://www.bloomling.ch/en-CH/seramis/plant-granules-for-indoor-plants" target="_blank" rel="noopener">Plant Granules for Indoor Plants</a>. 100% глина, pH около 5,7 (данные производителя).</li>
+      <li>Kiwicare: <a href="https://kiwicare.co.nz/advice/houseplant-advice/seramis-water-retention-granules" target="_blank" rel="noopener">Seramis water retention granules</a>. Пористость около 82%, капиллярный подъём около 26 см (данные производителя).</li>
+      <li>Costa Farms: <a href="https://help.costafarms.com/en/knowledge/wick-grow" target="_blank" rel="noopener">Wick &amp; Grow</a>. Фитиль всегда в воде, верхний полив не совмещают.</li>
+      <li>Garden Myths: <a href="https://www.gardenmyths.com/best-watering-method-for-houseplants-top-bottom-wick-or-self-watering-pots/" target="_blank" rel="noopener">Top, bottom, wick or self-watering</a>. Сравнение способов полива, промывка солей.</li>
+    </ul>
+      </details>
+      <p class="src-note"><strong>Ограничения:</strong> описания алоэ опираются на Aloe vera, бегонии на группу рекс, юкки на слоновую юкку, пальм на хамедорею, ховею, ареку и вашингтонию, хищных растений на венерину мухоловку и саррацению. Рецепты и коэффициенты полива составлены по описаниям в этих источниках, точных процентов в них нет. у папоротников в источниках нет точных процентов смеси и интервалов полива: состав смеси и коэффициент полива составлены по их описаниям (органическая влагоёмкая смесь для наземных, кора и сфагнум для эпифитов), это практическая оценка. Блехнум, пеллею и другие роды не добавлял, потому что не нашёл для них проверенных источников. Для остальных: замиокулькаса, фикуса, калатеи, пеперомии, диффенбахии, драцены, спатифиллума, сингониума, рафидофоры, фаленопсиса и суккулентов индивидуальные источники пока не проверены, описания и пропорции стартовые. Пропорции минеральных смесей практические. Список видов-литофитов алоказий неполный: проверяйте местообитание своего вида.</p>
+    </details>
+  </div>
+</main>
+
+<footer>Калькулятор носит рекомендательный характер: готовность к поливу проверяйте по влажности смеси, условия в каждой комнате разные.<br>Автор: <a href="https://t.me/PlantExoMix" target="_blank" rel="noopener" style="color:inherit">PlantExoMix</a></footer>
+
+<script>
+/* =============== КОМПОНЕНТЫ =============== */
+const COMPONENTS = [
+  { id: 'soil',     name: 'Грунт универсальный',             group: 'moist',   note: 'питательная база',
+    role: 'Торфяная или компостная основа: держит воду и даёт стартовый запас удобрений, дальше нужна подкормка. Мелкие частицы уменьшают воздушную пористость, поэтому при доле выше 30–35% смесь легко переувлажняется.', ev: 'data' },
+  { id: 'peat',     name: 'Торф верховой (без удобрений)',    group: 'moist',   note: 'кислая основа для хищных',
+    role: 'Кислый влагоёмкий торф без добавленных удобрений и извести: основа смеси для мухоловки и саррацении. По данным University of Arkansas, воздушная пористость торфа 10–15%, влагоёмкость 60–68%. Для этих растений подходит только чистый сфагновый торф, готовые грунты с удобрениями им вредны (ICPS, NYBG).', ev: 'data' },
+  { id: 'coco',     name: 'Кокосовый субстрат (крошка, коко-торф)', group: 'moist',  note: 'влага, мелкая фракция',
+    role: 'Мелкая фракция кокосового волокна: держит много воды и разлагается медленнее торфа. По данным University of Arkansas, влагоёмкость кокоса 73–80% при воздушной пористости 9,5–12,5%. Может содержать соли калия и натрия, поэтому небуферизованный брикет перед использованием промывают. В больших долях уплотняется и вытесняет воздух.', ev: 'data' },
+  { id: 'cocoChips', name: 'Кокосовые чипсы',                   group: 'struct',  note: 'воздух, крупная фракция',
+    role: 'Крупные кусочки кокосовой скорлупы и волокна, фракция около 5–20 мм. Работают как структурный компонент: создают воздушные карманы между корнями, держат воду заметно слабее крошки и не слёживаются. Часто заменяют часть коры. Как и крошку, их промывают от солей.', ev: 'prac' },
+  { id: 'barkBig',  name: 'Сосновая кора 5–15 мм',            group: 'struct',  note: 'воздушный каркас',
+    role: 'Крупные частицы создают поры между собой: через них уходит лишняя вода и поступает воздух. Сосновая кора разлагается медленно, но со временем мельчает, смесь оседает за 1–3 года. Некомпостированная кора может временно связывать азот, это компенсируют подкормкой.', ev: 'data' },
+  { id: 'treeFern', name: 'Триферн (папоротниковое волокно)', group: 'struct',  note: 'каркас + влага',
+    role: 'Редкий компонент. Волокно стволов древовидных папоротников: прочное, медленно разлагается, держит воздух и немного влаги. Многие древовидные папоротники охраняются, торговля ими контролируется CITES, поэтому триферн редок и дорог. Полноценной замены по свойствам нет; если его нет, доля уйдёт на кору.', ev: 'prac' },
+  { id: 'barkFine', name: 'Сосновая кора 0–2 мм',             group: 'buffer',  note: 'мелкая фракция',
+    role: 'Мелкая фракция заполняет пустоты между крупными частицами и удерживает часть влаги. Избыток мелочи забивает поры, поэтому больше 5–7% не нужно.', ev: 'data' },
+  { id: 'lava',     name: 'Лава',                              group: 'drain',   note: 'дренаж-минерал',
+    role: 'Пористый вулканический камень: не разлагается, держит часть воды во внутренних порах, утяжеляет смесь. Полезно для крупных растений, которым нужен устойчивый горшок.', ev: 'data' },
+  { id: 'perlite',  name: 'Перлит',                            group: 'drain',   note: 'воздух + лёгкость',
+    role: 'Вспученное вулканическое стекло: воду держит в основном на поверхности частиц, поэтому главным образом добавляет воздух. Химически инертен, pH близок к нейтральному.', ev: 'data' },
+  { id: 'pumice',   name: 'Пемза',                             group: 'drain',   note: 'эталонный дренаж',
+    role: 'Пористое вулканическое стекло: тяжелее перлита, не всплывает, держит часть воды во внутренних порах. Инертна и не разлагается.', ev: 'data' },
+  { id: 'foamGlass', name: 'Пеностекло',                       group: 'drain',   note: 'дренаж-модератор',
+    role: 'Вспененное стекло: лёгкое, прочное, инертное, не меняет pH и не разлагается. Крошка 2–10 мм работает как дренаж внутри смеси.', ev: 'data' },
+  { id: 'sand',     name: 'Крупный песок (кварцевый)',        group: 'drain',   note: 'вес + капиллярность',
+    role: 'Крупный промытый песок утяжеляет смесь и ускоряет сток. Мелкий песок, наоборот, забивает поры и уплотняет субстрат, поэтому только крупная фракция. Эпифитам вроде антуриума не нужен.', ev: 'data' },
+  { id: 'diatomite', name: 'Диатомит',                         group: 'buffer',  note: 'кремнезём + влага',
+    role: 'Частицы из кремнистых панцирей диатомовых водорослей: высокая пористость, держат воду и воздух, не разлагаются. Сколько кремния из них получает растение в горшке, не измерено; антигрибковый эффект в субстрате не подтверждён.', ev: 'prac' },
+  { id: 'zeolite',  name: 'Цеолит',                             group: 'buffer',  note: 'ионообменник',
+    role: 'Минерал с высокой ёмкостью катионного обмена: удерживает аммоний и калий и отдаёт их постепенно, уменьшая вымывание удобрений. Влияние на pH зависит от конкретного цеолита.', ev: 'data' },
+  { id: 'charcoal', name: 'Уголь (древесный)',                 group: 'buffer',  note: 'санитар смеси',
+    role: 'Пористый древесный уголь сорбирует часть органических веществ. Обычно щелочной, большие доли поднимают pH смеси. Защита корней от гнили в горшке исследованиями не подтверждена, это практика коллекционеров.', ev: 'prac' },
+  { id: 'sphagnum', name: 'Сфагнум',                            group: 'moist',   note: 'резерв влаги',
+    role: 'Сфагнум держит воду во много раз больше своей массы и подкисляет смесь. Антимикробные свойства описаны, но насколько они работают в горшечной смеси, изучено мало. Небольшая доля сглаживает перерывы между поливами.', ev: 'prac' },
+  { id: 'vermiculite', name: 'Вермикулит',                      group: 'moist',   note: 'дозатор влаги',
+    role: 'Слоистый минерал: держит много воды и катионов, содержит магний и калий. Со временем сминается и уплотняется, поэтому доля минимальная.', ev: 'data' },
+  { id: 'wormcast', name: 'Биогумус (вермикомпост)',            group: 'moist',   note: 'живое питание',
+    role: 'Вермикомпост: органическое питание и гуминовые вещества. В исследованиях на рассаде польза видна при умеренных долях, большие доли повышают засоление и уплотнение. Для ароидных отдельных данных нет: держите 2–7%.', ev: 'prac' },
+];
+
+COMPONENTS.push(
+  { id: 'ceramis', name: 'Seramis (глиняные гранулы)', group: 'moist', note: 'основа минерального грунта',
+    role: 'Обожжённая глина: по данным производителя пористость около 82%, капиллярный подъём около 26 см, pH около 5,7. Не слёживается и не гниёт, питания почти не содержит, нужна подкормка. Хорошо работает с фитилём.', ev: 'data' },
+  { id: 'keramzit', name: 'Керамзит 5–10 мм', group: 'drain', note: 'минеральный дренаж',
+    role: 'Обожжённые глиняные шарики: лёгкий дренаж и воздух, воды держат меньше, чем Seramis. В минеральной смеси нужен растениям, которым не нужна влага в грунте.', ev: 'data' }
+);
+const MIN_IDS = ['ceramis','keramzit','pumice','lava','perlite','foamGlass','sand','diatomite','zeolite'];
+const visible = c => soilType === 'min' ? MIN_IDS.includes(c.id) : !['ceramis','keramzit'].includes(c.id);
+const MINERAL = {
+  wet: { ceramis: 52, pumice: 14, diatomite: 8, zeolite: 8, lava: 8, perlite: 6, foamGlass: 4 },
+  mid: { ceramis: 40, pumice: 20, lava: 14, zeolite: 8, perlite: 8, diatomite: 6, foamGlass: 4 },
+  litho: { pumice: 30, lava: 20, zeolite: 10, ceramis: 24, perlite: 6, diatomite: 6, foamGlass: 4 },
+  dry: { pumice: 28, lava: 20, ceramis: 22, sand: 10, zeolite: 8, perlite: 6, keramzit: 6 },
+};
+const recipeOf = p => (soilType === 'min' && !p.tray) ? MINERAL[p.min] : p.recipe;
+const GROUP_KEYS = ['drain', 'moist', 'struct', 'buffer'];
+const GROUP_COLORS = {
+  drain: 'var(--color-primary)',
+  moist: 'var(--color-leaf)',
+  struct: 'var(--color-amber)',
+  buffer: 'var(--color-text-muted)',
+};
+
+/* =============== РАСТЕНИЯ =============== */
+const PLANTS = [
+  {
+    id: 'strelitzia', name: 'Стрелиция', latin: 'Strelitzia reginae / nicolai',
+    desc: 'Мощные толстые корни-веретена: растение любит питательную, влагоёмкую, но быстро просыхающую смесь и тяжёлый устойчивый горшок. Цветёт охотнее в слегка тесноватом горшке.',
+    recipe: { soil: 25, coco: 5, cocoChips: 7, barkBig: 15, treeFern: 10, barkFine: 5, lava: 8, perlite: 6, foamGlass: 5, diatomite: 4, zeolite: 4, charcoal: 3, sphagnum: 2, vermiculite: 1, pumice: 3, sand: 3, wormcast: 3 },
+    waterFactor: 1.0,
+    dryDepth: 'верхние 3–5 см; зимой, примерно половина кома',
+    rules: [
+      'Поливать проливом до выхода воды из дренажных отверстий, остаток из поддона сливать.',
+      'Между поливами грунт должен дышать: постоянная сырость опасна для толстых корней стрелиции.',
+      'Крупные листья испаряют много влаги, в жару сверяйтесь с грунтом каждые 2–3 дня.',
+      'Пересадка каждые 2–3 года весной; горшок лишь чуть больше предыдущего.',
+    ],
+  },
+  {
+    id: 'monstera', name: 'Монстера', latin: 'Monstera deliciosa / adansonii',
+    desc: 'Лазящая лиана с толстыми воздушными корнями: любит крупнокомковатый «ароидный» субстрат, много коры и минералов, умеренно органики. Растёт быстрее с опорой или моховым столбом.',
+    recipe: { barkBig: 20, coco: 6, cocoChips: 8, perlite: 12, pumice: 10, treeFern: 10, soil: 8, barkFine: 5, sphagnum: 4, charcoal: 4, zeolite: 3, lava: 4, diatomite: 2, wormcast: 2 },
+    waterFactor: 1.05,
+    dryDepth: 'верхние 3–5 см или верхняя треть кома',
+    rules: [
+      'Поливать проливом до дренажа, воду из поддона сливать.',
+      'Крупная фракция смеси означает: реже, но обильнее, промачивайте весь ком.',
+      'Молодые растения пересаживают ежегодно, взрослые, раз в 2–3 года.',
+      'Опора или моховый столб ускоряет рост и укрупняет листья.',
+    ],
+  },
+  {
+    id: 'philodendron', name: 'Филодендрон', latin: 'Philodendron spp.',
+    desc: 'Огромный род: крупным лианам (Birkin, Selloum, Imperial) подходит смесь как монстере, тонколистным бархатным (миканс, меланохризум), ближе к режиму антуриума. Базовый рецепт, золотая середина для большинства домашних филодендронов.',
+    recipe: { soil: 15, coco: 6, cocoChips: 9, barkBig: 18, treeFern: 8, perlite: 10, pumice: 8, barkFine: 4, sphagnum: 4, charcoal: 4, zeolite: 3, diatomite: 3, lava: 3, vermiculite: 2, wormcast: 3 },
+    waterFactor: 0.95,
+    dryDepth: 'верхние 2–4 см; тонколистные виды не пересушивать полностью',
+    rules: [
+      'Поливать проливом до дренажа, воду из поддона сливать.',
+      'Тонколистные бархатные виды держите ближе к режиму антуриума: не давайте кому пересыхать насквозь.',
+      'Крупные кустовые виды (Selloum, Imperial) прощают более редкий полив.',
+      'Пересадка раз в 1–2 года весной, по мере оплетения кома корнями.',
+    ],
+  },
+  {
+    id: 'anthurium', name: 'Антуриум', latin: 'Anthurium spp. (crystallinum, andraeanum)',
+    desc: 'Полуэпифит: корни должны дышать постоянно. Максимум коры и волокна, минимум тяжёлого грунта. Чувствителен к жёсткой воде, поливайте фильтрованной или дождевой.',
+    recipe: { barkBig: 25, treeFern: 12, perlite: 12, pumice: 8, sphagnum: 8, coco: 4, cocoChips: 6, barkFine: 5, charcoal: 5, diatomite: 3, zeolite: 2, lava: 5, soil: 2 },
+    waterFactor: 0.7,
+    dryDepth: 'верхние 2–3 см; сердцевина кома остаётся слегка влажной',
+    rules: [
+      'Поливайте чаще, но меньшим объёмом: антуриум не терпит ни пересушки насквозь, ни болота.',
+      'Вода, мягкая, фильтрованная или дождевая: антуриум чувствителен к солям и жёсткости.',
+      'Раз в месяц, обильный пролив чистой водой для смыва солей.',
+      'Пересадка раз в 1–2 года: кора и волокно слёживаются и теряют воздух.',
+    ],
+  },
+  {
+    id: 'alocasia', name: 'Алоказия наземная', latin: 'Alocasia × amazonica (Polly), zebrina, micholitziana (Frydek), longiloba, macrorrhizos, odora',
+    desc: 'Виды лесной подстилки: в природе растут в рыхлой гумусной почве под пологом леса. Тонкие корни чувствительны и к заливу, и к пересушке: нужна воздушная смесь с ровной лёгкой влажностью. Чувствительны к засолению, регулярно промывайте смесь чистой водой.',
+    recipe: { perlite: 12, pumice: 10, diatomite: 8, barkBig: 10, treeFern: 8, coco: 5, cocoChips: 7, soil: 10, lava: 6, sphagnum: 4, barkFine: 4, charcoal: 4, zeolite: 4, vermiculite: 2, wormcast: 2 },
+    waterFactor: 0.75,
+    dryDepth: 'верхние 2–3 см; равномерная лёгкая влажность по всему кому',
+    rules: [
+      'Поливать чаще и понемногу: цель равномерная лёгкая влажность, а не цикл «болото, затем пустыня».',
+      'Раз в месяц пролив чистой водой для смыва солей: алоказии чувствительны к засолению.',
+      'Зимой при прохладном содержании полив сокращают, возможен покой с потерей листьев.',
+      'Пересадка раз в 1–2 года.',
+    ],
+  },
+  {
+    id: 'alocasiaLith', name: 'Алоказия литофит', latin: 'Alocasia reginula (Black Velvet), sinuata, melo, reginae; спорные: cuprea, scalprum, baginda (Dragon Scale, Silver Dragon)',
+    desc: 'Виды, которые в природе растут на камне: A. reginula на затенённых известняковых утёсах, A. sinuata в известняковых лесах Филиппин с корнями прямо на известняке, A. melo на ультраосновных породах. Корни сидят в трещинах с небольшим количеством гумуса, вода сразу стекает. В культуре им нужен минеральный грунт, поэтому для этой группы калькулятор сразу включает минеральный режим. Данные неоднозначны: A. cuprea растёт на каменистых склонах с тонкой подстилкой, это промежуточный вариант; экология A. scalprum в природе не описана. Где A. baginda растёт в природе, пока не установлено. Она близкий родственник A. melo и A. reginula, поэтому коллекционеры обычно сажают её в такой же минеральный грунт. Список неполный: проверяйте местообитание своего вида.',
+    recipe: { pumice: 22, lava: 16, zeolite: 8, perlite: 10, barkBig: 10, coco: 2, cocoChips: 4, sphagnum: 4, diatomite: 6, charcoal: 3, barkFine: 3 },
+    waterFactor: 0.9,
+    dryDepth: 'верхние 3–4 см; глубина кома слегка влажная',
+    rules: [
+      'В минеральной смеси питания нет: подкармливайте слабым раствором удобрения при поливе.',
+      'Смесь должна быстро пропускать воду: никакой застойной влаги в поддоне.',
+      'Для видов с известняков полезна жёсткая или слегка обогащённая кальцием вода, но данных по дозировкам нет, это практика.',
+      'Горшок небольшой: в большом объёме минеральная смесь дольше остаётся влажной.',
+    ],
+  },
+];
+
+const EXTRA = {
+  strelitzia: { q: 'стрелиция bird of paradise', min: 'mid', wick: true },
+  monstera: { q: 'монстера monstera', min: 'mid', wick: true },
+  philodendron: { q: 'филодендрон philodendron', min: 'mid', wick: true },
+  anthurium: { q: 'антуриум anthurium', min: 'wet', wick: true },
+  alocasia: { q: 'алоказия alocasia polly поли зебрина фрайдек frydek лонгилоба', min: 'wet', wick: true },
+  alocasiaLith: { q: 'алоказия alocasia литофит скалы reginula black velvet melo dragon scale драконья шкура baginda silver dragon cuprea купрея sinuata синуата scalprum скальпрум мело блэк вельвет', min: 'litho', wick: false, preferMin: true },
+};
+PLANTS.forEach(p => Object.assign(p, EXTRA[p.id]));
+const R = {
+  monst: PLANTS[1].recipe,
+  vine: { barkBig: 20, coco: 6, cocoChips: 8, soil: 14, perlite: 12, pumice: 8, treeFern: 6, barkFine: 5, sphagnum: 4, charcoal: 4, zeolite: 3, lava: 4, diatomite: 3, wormcast: 3 },
+  hoya: { barkBig: 24, perlite: 14, coco: 4, cocoChips: 6, soil: 10, pumice: 10, treeFern: 6, sphagnum: 4, charcoal: 5, lava: 6, zeolite: 3, barkFine: 4, diatomite: 2, sand: 2 },
+  succ: { soil: 20, pumice: 20, perlite: 10, lava: 12, sand: 12, coco: 4, cocoChips: 2, barkBig: 8, zeolite: 5, charcoal: 4, diatomite: 3 },
+  ficus: { soil: 24, coco: 5, cocoChips: 7, barkBig: 14, perlite: 10, lava: 8, pumice: 8, sand: 5, charcoal: 4, zeolite: 4, wormcast: 4, diatomite: 3, barkFine: 4 },
+  calath: { soil: 20, coco: 13, cocoChips: 5, perlite: 14, sphagnum: 6, barkBig: 8, pumice: 8, charcoal: 4, vermiculite: 3, wormcast: 3, diatomite: 5, zeolite: 3, barkFine: 4, lava: 4 },
+  pep: { soil: 20, coco: 10, cocoChips: 4, perlite: 18, pumice: 10, barkBig: 10, charcoal: 4, sphagnum: 5, vermiculite: 3, zeolite: 3, lava: 5, diatomite: 3, barkFine: 5 },
+  spath: { soil: 26, coco: 10, cocoChips: 5, perlite: 12, barkBig: 12, pumice: 5, sphagnum: 5, charcoal: 4, zeolite: 3, vermiculite: 3, wormcast: 4, lava: 5, diatomite: 4, barkFine: 4 },
+  orch: { barkBig: 55, treeFern: 8, perlite: 8, sphagnum: 10, charcoal: 5, lava: 8, pumice: 6 },
+  fernT: { soil: 30, coco: 11, cocoChips: 5, perlite: 12, barkBig: 10, barkFine: 8, sphagnum: 6, wormcast: 5, pumice: 5, vermiculite: 3, charcoal: 3, lava: 2 },
+  fernE: { barkBig: 30, soil: 15, coco: 5, cocoChips: 7, perlite: 12, sphagnum: 8, treeFern: 6, pumice: 5, charcoal: 4, barkFine: 4, wormcast: 2, lava: 2 },
+  stag: { barkBig: 40, sphagnum: 20, perlite: 10, treeFern: 10, coco: 3, cocoChips: 5, charcoal: 5, pumice: 5, soil: 2 },
+  palm: { soil: 36, coco: 8, cocoChips: 4, perlite: 14, barkBig: 12, pumice: 8, barkFine: 6, wormcast: 4, charcoal: 3, lava: 3, sphagnum: 2 },
+  beg: { soil: 30, coco: 10, cocoChips: 4, perlite: 16, barkFine: 8, barkBig: 8, sphagnum: 6, pumice: 6, wormcast: 4, charcoal: 3, vermiculite: 3, lava: 2 },
+  yucca: { soil: 25, perlite: 28, sand: 24, pumice: 15, lava: 8 },
+  palmSun: { soil: 28, perlite: 20, pumice: 14, sand: 10, coco: 6, cocoChips: 2, barkBig: 8, lava: 6, charcoal: 4, barkFine: 2 },
+  dion: { peat: 50, sand: 50 },
+  sarr: { peat: 50, sand: 25, perlite: 25 },
+};
+const STD_RULES = ['Поливать проливом до дренажа, воду из поддона сливать.', 'Ориентир для полива: смесь просохла на глубину, указанную выше.', 'Пересадка раз в 1–2 года, горшок берут лишь чуть больше прежнего.'];
+const G = (id, name, latin, q, desc, recipe, wf, dry, min, wick, rules) =>
+  PLANTS.push({ id, name, latin, q, desc, recipe, waterFactor: wf, dryDepth: dry, min, wick, rules: rules.concat(STD_RULES) });
+G('epipremnum','Эпипремнум','Epipremnum aureum, pinnatum','pothos golden potos devil ivy помос золотой сциндапсус айви','Неприхотливая лиана, часто её зовут золотым сциндапсусом. Любит яркий рассеянный свет, но переносит и тень. Смесь должна просыхать между поливами. Ядовит при поедании, сок раздражает кожу.',R.vine,1.0,'верхние 3–5 см','mid',true,['Стебли ползут или лезут по опоре, с опорой листья крупнее.']);
+G('scindapsus','Сциндапсус','Scindapsus pictus, treubii','satin pothos сатин серебристый','Бархатные листья с серебристым рисунком. Уход близок к эпипремнуму, растёт медленнее, поэтому смесь дольше остаётся влажной: держите её воздушной.',R.vine,0.95,'верхние 3–4 см','mid',true,['Не доводите до залива: из-за медленного роста корни забирают мало воды.']);
+G('hoya','Хойя','Hoya carnosa, kerrii, lacunosa, linearis','hoya восковой плющ wax plant','Полусуккулентная лиана. RHS советует резко дренирующую смесь и небольшой горшок: в большом объёме смесь долго остаётся сырой, корни гниют. Зимой хойи полудремлют, полив умеренный.',R.hoya,1.25,'верхние 4–5 см, зимой ещё глубже, но ком не пересыхает полностью','dry',false,['Горшок берут всего на пару сантиметров больше корней (RHS).','Хойи не любят пересадок и годами живут в одном горшке.']);
+G('syngonium','Сингониум','Syngonium podophyllum','arrowhead plant сингониум','Лиана со стреловидными листьями, со временем вытягивается и лезет. По смеси и поливу ближе к филодендрону. Сок раздражает кожу.',R.vine,0.95,'верхние 2–3 см','mid',true,['Обрезка верхушек даёт куст, без неё растение вытягивается.']);
+G('rhaphidophora','Рафидофора','Rhaphidophora tetrasperma','mini monstera мини монстера','Мини-монстера: компактная лиана, любит опору и крупнокомковатую смесь. Ухаживают как за монстерой, горшок берут меньше.',R.monst,1.0,'верхние 3–4 см','mid',true,['Опора или моховый столб ускоряет рост.']);
+G('spathiphyllum','Спатифиллум','Spathiphyllum wallisii','спатифиллум peace lily женское счастье','Любит равномерно влажную, но не сырую смесь. При пересыхании листья падают, после полива быстро выправляются. Хорошо подходит для фитильного полива.',R.spath,0.7,'верхние 2 см','wet',true,['Листья обвисли: проверьте смесь, чаще причина в пересыхании.']);
+G('zamioculcas','Замиокулькас','Zamioculcas zamiifolia','zz plant долларовое дерево','Толстые клубни запасают воду: растение терпит пересушку и не терпит залив. Нужна минеральная воздушная смесь и редкий полив.',R.succ,2.0,'ком просох почти насквозь','dry',false,['Зимой полив ещё реже, лучше недолить, чем перелить.']);
+G('sansevieria','Сансевиерия','Dracaena trifasciata (Sansevieria)','щучий хвост тёщин язык snake plant','Суккулентные листья и ползучее корневище. Смесь тяжёлая минеральная, полив редкий. Залив быстро убивает корневище.',R.succ,2.0,'ком просох почти насквозь','dry',false,['Горшок устойчивый: листья высокие, лёгкий горшок опрокидывается.','Вода не должна попадать в центр розетки (UF/IFAS).','Переполив часто вызывает гниль корней, следите за мучнистым червецом и паутинным клещом (UF/IFAS).']);
+G('succulents','Кактусы и суккуленты','Cactaceae, Echeveria, Haworthia, Crassula','кактус суккулент эхеверия хавортия толстянка cactus succulent','Запасают воду в тканях, корни мелкие. Нужна минеральная смесь, которая быстро просыхает, и яркий свет.',R.succ,2.2,'весь ком','dry',false,['Зимой в прохладе полив сводят к минимуму.']);
+G('ficus','Фикус','Ficus elastica, lyrata, benjamina','фикус эластика лирата бенджамина rubber fig','Крупным фикусам нужен устойчивый горшок и питательная, но воздушная смесь. Не любят перестановок и сквозняков и сбрасывают листья.',R.ficus,1.05,'верхние 3–5 см','mid',true,['Млечный сок раздражает кожу, работайте в перчатках.']);
+G('calathea','Калатея и маранта','Goeppertia (Calathea), Maranta','калатея маранта ктенанта calathea prayer plant','Тонкие корни и любовь к постоянной лёгкой влажности. Смесь мелкая, влагоёмкая и не тяжёлая. Чувствительны к жёсткой воде и сухому воздуху.',R.calath,0.7,'верхний 1–2 см, ком не пересыхает','wet',true,['Вода мягкая, фильтрованная или дождевая.']);
+G('peperomia','Пеперомия','Peperomia spp.','пеперомия перомия','Мелкая корневая система и мясистые листья с запасом воды: лучше немного недолить, чем перелить. Небольшой горшок и мелкая воздушная смесь.',R.pep,1.2,'верхние 3–4 см','mid',true,['Не берите горшок с запасом по размеру.']);
+G('dieffenbachia','Диффенбахия','Dieffenbachia seguine','диффенбахия dumb cane','Крупная травянистая аронниковая с толстым стеблем. Любит питательную смесь и ровную влажность. Сок токсичен и раздражает слизистые: перчатки при обрезке.',R.spath,0.95,'верхние 3 см','mid',true,['Держите вдали от детей и животных.']);
+G('dracaena','Драцена','Dracaena fragrans, marginata','драцена dracaena','Древовидные драцены любят воздушную питательную смесь и тяжёлый горшок. Чувствительны к солям и фтору в воде, кончики листьев подсыхают.',R.ficus,1.1,'верхние 3–5 см','mid',true,['Вода отстоянная или фильтрованная.']);
+G('phalaenopsis','Фаленопсис','Phalaenopsis','орхидея фаленопсис orchid','Эпифит: корни дышат и участвуют в фотосинтезе, нужна крупная кора и прозрачный горшок. Обычный грунт душит корни.',R.orch,1.0,'кора и корни посветлели, горшок изнутри сухой','mid',false,['Корни серебристые: пора поливать; зелёные: влаги хватает.']);
+G('nephrolepis','Нефролепис','Nephrolepis exaltata (Boston fern)','boston fern бостонский папоротник нефролепис nephrolepis dallas папоротник fern ','Классический комнатный папоротник с длинными изгибающимися вайями. По данным NC State, ему нужны высокая влажность воздуха и влажная почва, которая не должна пересыхать, при этом нужен хороший дренаж. Сухой воздух провоцирует паутинного клеща и щитовок. Для кошек и собак не токсичен.',R.fernT,0.75,'верхний 1–2 см, ком не пересыхает полностью','wet',true,['Не давайте кому пересыхать: у нефролеписа это основная причина потери вай.','Зимой полив сокращают: в период покоя переувлажнение ведёт к гнили корней.','Поставьте на поддон с влажной галькой или рядом с увлажнителем.']);
+G('adiantum','Адиантум (венерин волос)','Adiantum raddianum','maidenhair fern адиантум венерин волос raddianum delta папоротник fern ','Один из самых капризных комнатных папоротников. NC State и RHS сходятся: почва постоянно влажная, но не болото, высокая влажность воздуха и частичная тень без прямого солнца. Университет Миннесоты прямо называет адиантум сложным в уходе. Если комната сухая, лучше выбрать нефролепис или птерис.',R.fernT,0.65,'верхний 1 см, ком не пересыхает ни разу','wet',true,['Корни не должны пересыхать вообще: одна сильная пересушка убивает вайи.','Зимой полив скудный, летом обильный (RHS).','Нужна хорошая вентиляция и высокая влажность воздуха, поддон с влажной галькой (RHS).','Прямое солнце и глубокая тень одинаково снижают жизненность растения.']);
+G('pteris','Птерис','Pteris cretica, ensiformis','pteris птерис ribbon fern критская лента папоротник fern ','Неприхотливее адиантума: по RHS, нужна влажная, но дренированная почва, полная или частичная тень и высокая влажность воздуха. Хорошо подходит новичкам, которым нужен лиственный папоротник.',R.fernT,0.85,'верхние 1–2 см','wet',true,['Тень или рассеянный свет, прямое солнце не подходит (RHS).','Почва влажная, но с хорошим дренажем (RHS).']);
+G('asplenium','Асплениум гнездовой','Asplenium nidus папоротник fern ','bird nest fern асплениум птичье гнездо nidus','Розетка цельных блестящих вай. По данным UF/IFAS, растёт в тени, любит влажные условия и почву с высоким содержанием органики, устойчивость к засухе минимальна. В природе эпифит, поэтому корням нужна воздушная смесь.',R.fernE,0.85,'верхние 2–3 см, ком не пересыхает насквозь','mid',false,['Засуху растение переносит плохо (UF/IFAS).','В природе растёт эпифитно: корням нужен воздух, смесь не должна уплотняться.']);
+G('platycerium','Платицериум (олений рог)','Platycerium bifurcatum папоротник fern ','staghorn fern платицериум олений рог рогатый bifurcatum','Эпифит, который чаще растят на деревянной пластине или коре со сфагнумом. В горшке по NC State нужна смесь для эпифитных орхидей или сфагнум и хороший дренаж. Корни подсыхают между поливами, но полностью сохнуть не должны. Университет Миннесоты относит платицериум к сложным растениям.',R.stag,1.1,'корни слегка подсохли, лист чуть вянет','mid',false,['Горшечное растение можно поливать снизу.','При низкой освещённости растёт больше болезней и вредителей (UF/IFAS).','Большинство видов не переносят температуру ниже 13 °C, P. bifurcatum и P. veitchii выдерживают до −1 °C (UF/IFAS).','Подкормка сбалансированным удобрением 1:1:1: молодые растения раз в месяц летом, взрослые один-два раза в год (UF/IFAS).']);
+G('davallia','Давалия (заячья лапка)','Davallia fejeensis, solida','rabbit foot fern давалия заячья лапка davallia fejeensis папоротник fern ','Опушённые корневища ползут по поверхности смеси и свисают через край горшка, поэтому их не засыпают. NC State советует торфяную смесь, влажную, но с просыханием верхних 1,2 см между поливами. Переносит сухой воздух лучше других папоротников. Для кошек и собак не токсична.',R.fernE,1.0,'верхние 1,2 см, ниже ком влажный','mid',false,['Корневища оставляйте на поверхности и не засыпайте.','Лучше подходит подвесной горшок, корневища свисают (Univ. of Minnesota).']);
+G('phlebodium','Флебодиум (золотой полиподиум)','Phlebodium aureum, pseudoaureum','phlebodium флебодиум полиподиум blue star фабодиум папоротник fern ','Эпифит с ползучим корневищем и сизо-голубыми вайями. По NC State, нужен рыхлый органический кислый субстрат, влажный, но не сырой. Переносит просыхание между поливами. Бурые края вай означают нехватку влажности воздуха.',R.fernE,1.05,'верхние 2–3 см; переносит просыхание между поливами','mid',false,['Бурые края вай: поднимите влажность воздуха.','Корневище растёт по поверхности, его не засыпают.']);
+G('cyrtomium','Циртомиум (падуб-папоротник)','Cyrtomium falcatum','holly fern циртомиум падуб cyrtomium папоротник fern','Жёсткие кожистые вайи, переносит тень и прохладу. Источники расходятся: NC State называет его чувствительным к засухе и любящим влажную гумусную почву, университет Миннесоты советует прохладу и подсушивание между поливами. Поэтому берётся золотая середина. Для кошек и собак не токсичен.',R.fernT,0.95,'верхние 2–3 см','mid',true,['Прохлада и тень подходят лучше жары.','Мучнистые червецы и клещи нападают на ослабленное засухой растение.']);
+G('stromanthe','Строманта','Stromanthe thalia (sanguinea), Triostar','stromanthe строманта триостар triostar строманте','Родственница калатеи и маранты с розово-кремовыми листьями. По данным NC State, нужны рассеянный свет без прямого солнца, влажная дренированная почва с высоким содержанием органики и высокая влажность воздуха. Сухую почву не переносит. Для домашних животных безопасна.',R.calath,0.7,'верхние 1–2 см, ком не пересыхает','wet',true,['Прямое солнце обжигает листья.','При сухом воздухе помогает увлажнитель или поддон с влажной галькой.']);
+G('aloe','Алоэ','Aloe vera, arborescens','aloe алоэ вера столетник aloe vera','Суккулент, которому нужен яркий свет и смесь для суккулентов с очень хорошим дренажем. По данным NC State, почве дают полностью просохнуть между поливами, переувлажнение вызывает гниль корней. Горшок с дренажными отверстиями, лучше глиняный. Для других видов алоэ уход близкий. Сок и листья могут вызвать дерматит и опасны для кошек и собак.',R.succ,2.0,'ком просох почти насквозь','dry',false,['Полностью просушивайте смесь между поливами, зимой поливайте реже.','Лучше глиняный горшок с несколькими дренажными отверстиями.','Опасно для кошек и собак при поедании.']);
+G('chamaedorea','Хамедорея','Chamaedorea elegans','chamaedorea хамедорея palm пальма бамбуковая пальма neanthe bella','Компактная комнатная пальма, переносит слабый свет. По данным NC State, смесь должна быть богатой гумусом и дренированной, между поливами верхний слой слегка подсыхает. Кратковременную засуху терпит, но гуще растёт во влажной почве. Для животных безопасна.',R.palm,1.0,'верхние 3–4 см','mid',true,['Переполив для хамедореи основная проблема: давайте смеси слегка подсохнуть.','Протирайте листья: пыль и сухой воздух привлекают клещей.']);
+G('howea','Ховея (кентия)','Howea forsteriana','howea kentia ховея кентия palm пальма','Крупная пальма, которая выдерживает слабый свет и небрежный уход. NC State советует дренированную смесь, богатую гумусом, которая не пересыхает полностью. Засуху в целом терпит. Для животных безопасна.',R.palm,1.1,'верхние 3–4 см','mid',true,['Прямого полуденного солнца избегайте.','Горшок берите устойчивый: растение вырастает высоким, листья тяжёлые.']);
+G('dypsis','Арека (дипсис)','Dypsis lutescens (Chrysalidocarpus lutescens)','areca арека палм chrysalidocarpus дипсис palm пальма','Пальма с перистыми золотистыми черешками. По NC State, нужны яркий рассеянный свет, высокая влажность воздуха и дренированная смесь, которая в сезон роста влажная, но не сырая. Для кошек и собак безопасна, но сердцевину и молодые почки есть нельзя.',R.palm,0.85,'верхние 2–3 см','mid',true,['В сезон роста смесь влажная, но не сырая.','Нужна высокая влажность воздуха, при сухом воздухе используйте увлажнитель.']);
+G('begonia','Бегония','Begonia rex-cultorum (рекс)','begonia бегония рекс rex begonia','Описание относится к бегониям группы рекс, у клубневых и вечноцветущих уход отличается. По NC State, нужны яркий рассеянный свет, влажная дренированная почва с высоким содержанием органики и кислая реакция (pH ниже 6), высокая влажность воздуха. Переполив вызывает гниль корней, листья не опрыскивают. Сок раздражает кожу и опасен для кошек и собак.',R.beg,0.85,'верхние 1–2 см','mid',false,['Листья не опрыскивайте, влажность поднимайте поддоном с влажной галькой.','Переполив приводит к гнили корней.','Сок раздражает кожу, работайте в перчатках.']);
+G('yucca','Юкка','Yucca gigantea (elephantipes)','yucca юкка слоновая yucca elephantipes','Засухоустойчивое растение, которому нужны яркий свет и смесь с большой долей минеральных компонентов. NC State для дома советует одну часть грунта на три части перлита или песка. Переполив вызывает гниль корней. Листья и корни токсичны для людей и животных, содержат сапонины.',R.yucca,1.8,'ком просох на две трети глубины, зимой почти насквозь','dry',false,['Полив умеренный: растение терпит засуху, переполив приводит к гнили корней.','Ниже 10 °C растение страдает, зимой держите в тепле.','Токсично для людей, кошек и собак.']);
+G('washingtonia','Вашингтония','Washingtonia robusta, filifera','washingtonia вашингтония веерная пальма palm пальма fan palm','Быстрорастущая веерная пальма из засушливых районов. По NC State, любит полное солнце (6 и больше часов прямого света) и хорошо дренированную почву, переносит засуху, но с постоянной влагой растёт быстрее. В постоянно сырой почве без доступа воздуха быстро погибает. Склонна к дефициту калия: кончики листочков буреют и отмирают. В квартире это молодое растение, которое со временем вырастает в крупное дерево.',R.palmSun,1.3,'верхние 4–5 см','mid',false,['Полное солнце, в квартире ставьте на самый светлый подоконник или под лампу.','Засуху терпит, переувлажнение нет: полив после просыхания верхних 4–5 см.','При бурых кончиках листьев подкормка с калием.','Следите за паутинным клещом и щитовкой.']);
+G('dionaea','Венерина мухоловка','Dionaea muscipula','dionaea venus flytrap мухоловка венерина хищные carnivorous хищное растение','Хищное растение, которому нужна бедная кислая смесь и чистая вода. ICPS и NYBG советуют смесь из половины торфа без удобрений и половины крупного кварцевого песка, сверху слой песка около 1 см. Горшок ставят в поддон с водой глубиной 1–2 см, поддон не должен высыхать. Нужно не меньше 6 часов прямого света, а под лампой 12–16 часов в день. Не удобрять почву: насекомых растение ловит само. Зимний покой по желанию, с понижением температуры до 7–10 °C.',R.dion,0.5,'ком всегда влажный, в поддоне вода','wet',false,['Только дистиллированная, дождевая или обратноосмотическая вода: водопроводная и бутилированная вредят (ICPS, NYBG).','В поддоне всегда слой воды 1–2 см, поддон не оставляйте сухим (ICPS).','Грунт без удобрений, не кормить через землю (ICPS, NYBG).','Не лить воду на ловчие листья и не срезать ловушки без причины.']);
+G('sarracenia','Саррацения','Sarracenia spp.','sarracenia саррацения pitcher plant кувшинчик хищные carnivorous хищное растение','Хищное растение с трубчатыми ловчими листьями из болот юго-востока США. NYBG и MACPS советуют смесь из 1 части сфагнового торфа и 1 части перлита или крупного песка без удобрений. Горшок стоит в поддоне с водой около 1–2,5 см. Нужно полное солнце, дома лучше под яркой лампой 8–10 часов зимой и 16–18 летом. Зимой нужен покой 3–5 месяцев с прохладой и меньшим светом, грунт при этом остаётся влажным. Неглазурованную керамику не берите: она вымывает минералы в смесь.',R.sarr,0.5,'ком всегда влажный, в поддоне вода','wet',false,['Только дождевая, дистиллированная или обратноосмотическая вода (NYBG, MACPS).','Вода в поддоне 1–2,5 см постоянно, зимой грунт слегка влажный (NYBG, MACPS).','Зимний покой 3–5 месяцев обязателен, без него растение слабеет (NYBG).','Не используйте неглазурованную керамику: она вытягивает воду и отдаёт минералы в смесь (MACPS).']);
+for(const _id of ['dionaea','sarracenia']){ const _p=PLANTS.find(x=>x.id===_id); _p.tray=true; _p.rules=_p.rules.slice(0,-STD_RULES.length); }
+const PLANT_GROUPS = [
+  { key: 'ferns', name: 'Папоротники', ids: ['nephrolepis','adiantum','pteris','asplenium','platycerium','davallia','phlebodium','cyrtomium'] },
+  { key: 'palms', name: 'Пальмы', ids: ['chamaedorea','howea','dypsis','washingtonia'] },
+  { key: 'carn', name: 'Хищные растения', ids: ['dionaea','sarracenia'] },
+];
+const WICK_ADJ = { drain: 0.85, moist: 1.25, struct: 0.85, buffer: 1.05 };
+const CLOSED_RULES = ['Лишняя вода не уходит, поэтому не проливайте до стока. Ориентир на один полив: около 15–20% объёма горшка (для 3 л это 450–600 мл). Это практика коллекционеров, а не измерение.',
+  'На дно нужен дренажный слой из минерального материала (керамзит, пемза, лава) высотой 2–4 см: туда стекает лишняя вода, а не к корням.',
+  'Удобнее всего прозрачный горшок или индикатор уровня воды: видно, стоит ли вода на дне. Пока на дне вода, не поливать.',
+  'Соли от удобрений не вымываются. Раз в 1–2 месяца промойте смесь большим объёмом чистой воды и слейте её, аккуратно наклонив горшок.',
+  'Для закрытого горшка лучше минеральный грунт: органика в постоянной влаге закисает быстрее.'];
+const WICK_RULES = ['Фитиль (хлопок или синтетика) одним концом входит в смесь, другим стоит в воде резервуара. Он должен всегда касаться воды.','Не совмещайте с верхним поливом: сверху вода будет добавляться к тому, что подаёт фитиль, и смесь переувлажнится.','Резервуар под горшком: следите, чтобы вода не цвела, меняйте её и промывайте фитиль.','Периодически промывайте смесь сверху чистой водой до стока, пока фитиль вынут из воды: так уходят соли от удобрений.'];
+const POTS = [100,200,300,400,500,600,800,1000,1500,2000,2500,3000,3500,4000,5000,6000,7000,8000,10000,12000,15000,20000,30000,50000];
+
+/* =============== РЕЖИМЫ И УСЛОВИЯ =============== */
+const MODES = {
+  base:   { drain: 1.0, moist: 1.0, struct: 1.0, buffer: 1.0, label: 'Базовый' },
+  drain:  { drain: 1.35, moist: 0.72, struct: 1.15, buffer: 0.9, label: 'Максимальный дренаж' },
+  retain: { drain: 0.75, moist: 1.35, struct: 0.95, buffer: 1.05, label: 'Больше влаги' },
+};
+
+const LIGHT_ADJ = [
+  { label: 'слабое',  drain: 1.12, moist: 0.9 },
+  { label: 'среднее', drain: 1.0,  moist: 1.0 },
+  { label: 'яркое',   drain: 0.94, moist: 1.06 },
+];
+
+const TEMP_LABELS = ['18–20 °C', '20–24 °C', '24–28 °C', 'выше 28 °C'];
+const LIGHT_LABELS = ['слабое', 'среднее', 'яркое'];
+
+// Базовый интервал полива в днях [свет][температура], масштабируется на waterFactor растения
+const WATER_MATRIX = [
+  /* слабый свет  */ [21, 16, 12, 9],
+  /* средний свет */ [16, 11, 8, 6],
+  /* яркий свет   */ [12, 9, 6, 4],
+];
+
+/* =============== СОСТОЯНИЕ =============== */
+let plantId = 'strelitzia';
+let mode = 'base';
+let available = {};
+COMPONENTS.forEach(c => available[c.id] = false);
+let potL = 3, light = 2, temp = 1, hum = 2, soilType = 'org', wick = false, closed = false, autoMin = false;
+
+const plant = () => PLANTS.find(p => p.id === plantId);
+
+/* =============== ЛОГИКА =============== */
+function computeMix() {
+  const p = plant();
+  const adj = MODES[mode];
+  const lAdj = LIGHT_ADJ[light];
+
+  // суммарные базовые доли по группам (только доступные компоненты из рецепта)
+  const groupBase = {};
+  GROUP_KEYS.forEach(g => groupBase[g] = 0);
+  COMPONENTS.forEach(c => {
+    if (available[c.id] && visible(c) && (recipeOf(p)[c.id] || 0) > 0) groupBase[c.group] += recipeOf(p)[c.id];
+  });
+
+  // целевые доли групп с учётом режима и света
+  const target = {};
+  let total = 0;
+  GROUP_KEYS.forEach(g => {
+    target[g] = groupBase[g] * adj[g] * (lAdj[g] !== undefined ? lAdj[g] : 1) * (wick ? WICK_ADJ[g] : 1);
+    total += target[g];
+  });
+  if (total <= 0) return [];
+
+  const out = [];
+  GROUP_KEYS.forEach(g => {
+    if (groupBase[g] <= 0) return;
+    COMPONENTS.forEach(c => {
+      if (!available[c.id] || !visible(c) || c.group !== g) return;
+      const r = recipeOf(p)[c.id] || 0;
+      if (r <= 0) return;
+      out.push({ ...c, pct: (r / groupBase[g]) * target[g] / total * 100 });
+    });
+  });
+
+  const sum = out.reduce((a, c) => a + c.pct, 0);
+  out.forEach(c => c.pct = c.pct / sum * 100);
+  return out.sort((a, b) => b.pct - a.pct);
+}
+
+// Поправка на объём горшка: оценка. Высота слоя растёт как кубический корень объёма, и смесь сохнет дольше. База 3 л = 1.0, от 0.3 до 1.8
+const potFactor = v => Math.min(1.8, Math.max(0.3, Math.cbrt(v / 3)));
+const dayWord = n => { const a = n % 100, b = n % 10; return (a > 10 && a < 20) ? 'дней' : b === 1 ? 'день' : (b >= 2 && b <= 4) ? 'дня' : 'дней'; };
+
+// Физика смеси: [влагоёмкость, воздушность], % объёма.
+// По данным University of Arkansas: soil (торф), coco (кокосовая крошка), barkFine (кора, компост), perlite. Остальное оценки.
+const PHYS = {
+  soil: [65, 12], peat: [64, 12], coco: [70, 14], cocoChips: [50, 32], barkBig: [30, 40], treeFern: [35, 40], barkFine: [55, 15],
+  lava: [25, 35], perlite: [38, 25], pumice: [30, 35], foamGlass: [20, 45], sand: [22, 30],
+  diatomite: [55, 20], zeolite: [35, 25], charcoal: [40, 30], sphagnum: [80, 12], vermiculite: [60, 15],
+  wormcast: [60, 10], ceramis: [45, 30], keramzit: [15, 45],
+};
+
+// pH компонентов: типичные значения, оценка (не измерение). Для смеси берём среднее по долям, реальное значение зависит от марки и буферности.
+const PH_EST = { soil: 6.0, peat: 4.0, coco: 6.2, cocoChips: 6.2, barkBig: 5.2, barkFine: 5.2, treeFern: 5.5, lava: 7.5, perlite: 7.0, pumice: 7.0, foamGlass: 7.0, sand: 7.0, diatomite: 7.5, zeolite: 7.5, charcoal: 8.5, sphagnum: 4.0, vermiculite: 7.0, wormcast: 7.0, ceramis: 5.7, keramzit: 7.5 };
+function phOf(mix) {
+  let s = 0, w = 0;
+  mix.forEach(c => { if (PH_EST[c.id] !== undefined) { s += c.pct; w += c.pct * PH_EST[c.id]; } });
+  return s > 0 ? w / s : null;
+}
+const PH_TARGET = { begonia: { hi: 6, text: 'ниже 6' }, washingtonia: { lo: 6, hi: 8, text: '6,0–8,0' } };
+function phNoteHtml(p, mix) {
+  if (p.tray) return 'Хищным нужна кислая бедная смесь: торф без удобрений и извести. Землю не подкармливают, растение питается пойманными насекомыми.';
+  const ph = phOf(mix);
+  const tg = PH_TARGET[p.id] || { lo: 5.5, hi: 7, text: '5,5–7,0 (общий ориентир)' };
+  const a = [];
+  if (ph === null) {
+    a.push('Отметьте компоненты, и тут появится pH вашей смеси. Растению подходит ' + tg.text + '.');
+  } else {
+    const phs = ph.toFixed(1).replace('.', ',');
+    let v;
+    if (tg.hi !== undefined && ph > tg.hi + 0.05) v = 'Выходит выше нормы. Уберите часть угля, цеолита, диатомита или лавы и добавьте ' + (soilType === 'min' ? 'Seramis.' : 'кору, сфагнум или грунт.');
+    else if (tg.lo !== undefined && ph < tg.lo - 0.05) v = 'Выходит кисловато. Добавьте перлит или пемзу' + (soilType === 'min' ? '.' : ' или грунт.');
+    else v = 'В норму попадаете.';
+    a.push('pH вашей смеси примерно <strong>' + phs + '</strong>, растению подходит ' + tg.text + '. ' + v + ' Посчитано по типичным цифрам компонентов, у конкретной марки может уйти на единицу в любую сторону. Нужна точность: pH-метр.');
+  }
+  if (soilType === 'min') {
+    a.push('Seramis и другие гранулы не питают растение, поэтому подкормка обязательна. Гранулы время от времени промывайте чистой водой.');
+  } else if (ph !== null) {
+    const base = Math.round(mix.filter(c => c.id === 'soil' || c.id === 'wormcast').reduce((s, c) => s + c.pct, 0));
+    if (p.min === 'dry') a.push('Кормить редко: слабым раствором раз в 3–4 недели в сезон роста, зимой не нужно.');
+    else if (base >= 30) a.push('Грунта и биогумуса в смеси ' + base + '%, своей еды хватит на 4–6 недель после пересадки. Дальше подкормка раз в 2–3 недели в сезон роста.');
+    else if (base < 15) a.push('Грунта и биогумуса в смеси всего ' + base + '%, питания почти нет. Кормите с первого месяца слабым раствором раз в 2 недели.');
+    else a.push('Подкормка раз в 2–3 недели в сезон роста, можно добавить гранулы пролонгированного удобрения.');
+  }
+  return a.join('<br>');
+}
+const mixPhys = parts => {
+  let s = 0, w = 0, a = 0;
+  parts.forEach(([id, pct]) => { const ph = PHYS[id]; if (!ph) return; s += pct; w += pct * ph[0]; a += pct * ph[1]; });
+  return s > 0 ? { W: w / s, A: a / s } : null;
+};
+// Типовая комнатная смесь, под которую подобраны коэффициенты растений: 40% грунт, 30% кора, 20% перлит, 10% кокос
+const REF_PHYS = mixPhys([['soil', 40], ['barkBig', 30], ['perlite', 20], ['coco', 10]]);
+const openRoles = new Set();
+let substInfo = { f: 1, W: null, A: null };
+function setSubst(mix) {
+  const ph = mixPhys(mix.map(c => [c.id, c.pct]));
+  if (!ph) { substInfo = { f: 1, W: null, A: null }; return; }
+  // больше воды в смеси: интервал длиннее; больше воздуха и крупных пор: смесь просыхает быстрее
+  const f = Math.pow(ph.W / REF_PHYS.W, 0.7) * Math.pow(REF_PHYS.A / ph.A, 0.3);
+  substInfo = { f: Math.min(1.8, Math.max(0.55, f)), W: ph.W, A: ph.A };
+}
+// Влажность воздуха: поправка к интервалу относительно 50%, через дефицит влажности (1 - RH), с демпфированием
+const HUM = [30, 40, 50, 60, 70, 80, 90];
+const humFactor = rh => Math.pow(0.5 / (1 - rh / 100), 0.4);
+const CLOSED_WATER = 1.4; // оценка: в закрытом горшке вода не уходит через отверстия
+const thirstOf = wf => wf <= 0.8 ? 'любит влагу, не даёт пересыхать' : wf <= 1.15 ? 'умеренный полив' : 'терпит засуху, лучше недолить';
+const factorsNow = () => ({
+  plant: plant().waterFactor,
+  pot: potFactor(potL),
+  subst: substInfo.f,
+  hum: humFactor(HUM[hum]),
+  closed: (closed && !wick) ? CLOSED_WATER : 1,
+});
+const daysFor = base => {
+  const f = factorsNow();
+  return Math.min(45, Math.max(2, Math.round(base * f.plant * f.pot * f.subst * f.hum * f.closed)));
+};
+function waterDays() { return daysFor(WATER_MATRIX[light][temp]); }
+
+const rangeOf = d => { const lo = Math.max(2, Math.round(d * 0.75)); return [lo, Math.max(lo + 1, Math.round(d * 1.2))]; };
+
+/* =============== ОТРИСОВКА =============== */
+const fmt1 = n => n.toLocaleString('ru-RU', { maximumFractionDigits: 1 });
+
+const volLabel = ml => ml < 1000 ? Math.round(ml) + ' мл' : fmt1(ml / 1000) + ' л';
+const volStr = ml => ml < 20 ? Math.max(1, Math.round(ml)) + ' мл' : ml < 1000 ? Math.round(ml / 10) * 10 + ' мл' : fmt1(ml / 1000) + ' л';
+const pctStr = v => (v >= 10 ? Math.round(v) : fmt1(v)) + '%';
+function measure(ml) {
+  if (ml < 3) return 'щепотка';
+  if (ml < 10) return '≈ ' + fmt1(Math.max(0.5, Math.round(ml / 5 * 2) / 2)) + ' ч. л.';
+  if (ml < 100) return '≈ ' + fmt1(Math.max(1, Math.round(ml / 15 * 2) / 2)) + ' ст. л.';
+  if (ml >= 2000) return '≈ ' + fmt1(Math.round(ml / 500) / 2) + ' л';
+  const g = Math.max(0.5, Math.round(ml / 250 * 2) / 2);
+  const w = g % 1 !== 0 ? 'стакана' : (g === 1 ? 'стакан' : (g >= 2 && g <= 4 ? 'стакана' : 'стаканов'));
+  return '≈ ' + fmt1(g) + ' ' + w;
+}
+
+function render() {
+  const p = plant();
+  const pot = potL;
+  const mix = computeMix();
+  setSubst(mix);
+
+  // ---- растение ----
+  document.getElementById('plantDesc').innerHTML =
+    '<span class="latin">' + p.latin + '</span>' + p.desc;
+
+  // ---- групповые доли ----
+  const gSums = { drain: 0, moist: 0, struct: 0, buffer: 0 };
+  mix.forEach(c => gSums[c.group] += c.pct);
+
+  const MINERAL_IDS = ['lava','perlite','pumice','foamGlass','sand','diatomite','zeolite','vermiculite','ceramis','keramzit'];
+  const minPct = mix.filter(c => MINERAL_IDS.includes(c.id)).reduce((a, c) => a + c.pct, 0);
+  const noMix = mix.length === 0;
+  document.getElementById('kvAir').textContent = noMix ? '—' : Math.round(minPct) + '%';
+  document.getElementById('kvMoist').textContent = noMix ? '—' : Math.round(100 - minPct) + '%';
+  document.getElementById('kvStruct').textContent = volLabel(pot * 1000);
+
+  document.getElementById('barDrain').style.width = gSums.drain + '%';
+  document.getElementById('barMoist').style.width = gSums.moist + '%';
+  document.getElementById('barStruct').style.width = gSums.struct + '%';
+  document.getElementById('barBuffer').style.width = gSums.buffer + '%';
+
+  document.getElementById('litDrain').textContent = volStr(pot * gSums.drain * 10);
+  document.getElementById('litMoist').textContent = volStr(pot * gSums.moist * 10);
+  document.getElementById('litStruct').textContent = volStr(pot * gSums.struct * 10);
+  document.getElementById('litBuffer').textContent = volStr(pot * gSums.buffer * 10);
+
+  // ---- таблица ----
+  const body = document.getElementById('mixBody');
+  body.innerHTML = '';
+  mix.forEach(c => {
+    const ml = pot * c.pct * 10;
+    const frac = measure(ml);
+    const tr = document.createElement('tr');
+    tr.innerHTML =
+      '<td><span class="dot" style="background:' + GROUP_COLORS[c.group] + '"></span><span class="comp-name">' + c.name + '</span></td>' +
+      '<td class="pct">' + (c.pct >= 10 ? Math.round(c.pct) : fmt1(c.pct)) + '%</td>' +
+      '<td><span class="lit">' + volStr(ml) + '</span><br><span class="frac">' + frac + '</span></td>';
+    body.appendChild(tr);
+  });
+
+  if (noMix) body.innerHTML = '<tr><td colspan="3">Отметьте слева компоненты, которые у вас есть. Доли и объёмы посчитаются из них.</td></tr>';
+  document.getElementById('potTitle').textContent = volLabel(pot * 1000);
+  document.getElementById('potOut').textContent = volLabel(pot * 1000);
+  document.getElementById('waterTitle').textContent = wick ? 'Фитильный полив' : 'Частота полива';
+  document.getElementById('recipePlant').textContent = p.name.toLowerCase();
+
+  // ---- предупреждения ----
+  const warns = [];
+  const wc = mix.find(c => c.id === 'wormcast');
+  const bf = mix.find(c => c.id === 'barkFine');
+  if (gSums.moist < 5)  warns.push('Почти нет влагоёмкой базы, смесь не будет держать воду и питание.');
+  if (soilType === 'org' && gSums.struct < 8) warns.push('Мало крупной структуры, смесь со временем слёживается и теряет воздух.');
+  if (gSums.drain < 8)  warns.push('Мало минерального дренажа, риск залива, особенно в глубоком горшке.');
+  if (wc && wc.pct > 12) warns.push('Биогумуса больше 12%, смесь начнёт заиливаться, снизьте его долю.');
+  if (bf && bf.pct > 10) warns.push('Мелкой коры больше 10%, она «запирает» воздух в смеси.');
+  if (pot < 0.6) warns.push('В горшке до 600 мл крупная кора и лава не помещаются между корнями: берите фракцию около 3–8 мм.');
+  if (soilType === 'min') warns.push('Минеральный грунт почти не содержит питания: кормите слабым раствором удобрения при поливе, иначе рост остановится.');
+  if (p.preferMin && soilType === 'org') warns.push('Эта группа в природе растёт на скалах: органический субстрат для неё запасной вариант, основной режим минеральный.');
+  if (closed && !wick && soilType === 'org') warns.push('Закрытый горшок с органическим субстратом: высокий риск закисания и гнили корней. Надёжнее минеральный грунт и дренажный слой на дне.');
+  if (closed && wick) warns.push('При фитильном поливе вода подаётся из резервуара, поэтому настройка закрытого горшка на интервал не влияет.');
+  if (wick && !p.wick) warns.push('Для этого растения фитиль подходит плохо: корни или запасающие ткани не терпят постоянной влаги. Лучше поливать сверху.');
+  document.getElementById('phNote').innerHTML = phNoteHtml(p, mix);
+  if (noMix) warns.length = 0;
+  const warnBox = document.getElementById('warnBox');
+  warnBox.hidden = warns.length === 0;
+  warnBox.innerHTML = warns.map(w => '<div class="w">' + w + '</div>').join('');
+
+  // ---- полив ----
+  const grid = document.getElementById('waterGrid');
+  grid.innerHTML = '';
+  const d = waterDays();
+  const rg = rangeOf(d);
+  WATER_MATRIX.forEach((row, li) => {
+    row.forEach((base, ti) => {
+      const dd = daysFor(base);
+      const r = rangeOf(dd);
+      const cell = document.createElement('div');
+      cell.className = 'w-cell' + (li === light && ti === temp ? ' active' : '') + (dd <= 5 ? ' hot' : '');
+      cell.innerHTML = '<div class="days">' + r[0] + '–' + r[1] + ' дн.</div>' +
+        '<div class="cond">' + LIGHT_LABELS[li] + ' · ' + TEMP_LABELS[ti] + '</div>';
+      grid.appendChild(cell);
+    });
+  });
+
+  const subMap = {
+    0: 'Прохлада замедляет просыхание, проверяйте грунт, а не календарь.',
+    1: 'Комфортный режим: полив после просыхания ' + p.dryDepth + '.',
+    2: 'Жара усиливает испарение, проверяйте грунт каждые 2–3 дня.',
+    3: 'В сильную жару при ярком свете смесь может просохнуть досрочно.',
+  };
+  document.getElementById('waterBig').textContent = 'Каждые ' + rg[0] + '–' + rg[1] + ' ' + dayWord(rg[1]) + '';
+  document.getElementById('waterSub').textContent =
+    p.name + ' · ' + LIGHT_LABELS[light] + ' освещение · ' + TEMP_LABELS[temp] + ' · влажность ' + HUM[hum] + '%. ' + subMap[temp] + (hum >= 5 ? ' Влажность высокая: смесь сохнет медленнее, поливайте по состоянию смеси, не по календарю.' : hum <= 1 ? ' Воздух сухой: смесь сохнет быстрее, чем показывает таблица, проверяйте её чаще.' : '');
+
+  if (p.tray) {
+    document.getElementById('waterBig').textContent = 'Вода в поддоне всегда';
+    document.getElementById('waterSub').textContent = 'Слой 1–2 см, подливайте дистиллированную, дождевую или обратноосмотическую воду. Интервал по календарю здесь не нужен: поддон не должен высыхать.';
+  } else if (wick) {
+    document.getElementById('waterBig').textContent = 'Проверять уровень воды раз в ' + rg[0] + '–' + rg[1] + ' ' + dayWord(rg[1]) + '';
+    document.getElementById('waterSub').textContent = 'Фитиль подаёт воду по мере расхода. Срок взят из режима верхнего полива как ориентир расхода, это оценка, а не замер. Смотрите на уровень воды, не на календарь.';
+  }
+  // ---- из чего сложился интервал ----
+  const f = factorsNow();
+  const baseD = WATER_MATRIX[light][temp];
+  const eff = v => v < 0.95 ? 'чаще' : v > 1.05 ? 'реже' : 'без изменений';
+  const fx = v => { const pc = Math.round((v - 1) * 100); return pc === 0 ? 'не меняет' : pc < 0 ? 'чаще на ' + (-pc) + '%' : 'реже на ' + pc + '%'; };
+  const rows = [
+    ['Свет и температура', LIGHT_LABELS[light] + ', ' + TEMP_LABELS[temp], baseD + ' ' + dayWord(baseD)],
+    ['Растение', thirstOf(p.waterFactor), fx(f.plant)],
+    ['Объём горшка ' + volLabel(pot * 1000), eff(f.pot) === 'чаще' ? 'небольшой объём сохнет быстрее' : eff(f.pot) === 'реже' ? 'большой объём сохнет дольше' : 'базовый объём', fx(f.pot)],
+    ['Ваша смесь', substInfo.W === null ? 'компоненты не выбраны, взята типовая смесь' : 'влагоёмкость ≈ ' + Math.round(substInfo.W) + '%, воздушность ≈ ' + Math.round(substInfo.A) + '% (типовая смесь: ' + Math.round(REF_PHYS.W) + '% и ' + Math.round(REF_PHYS.A) + '%)', fx(f.subst)],
+    ['Влажность воздуха ' + HUM[hum] + '%', eff(f.hum) === 'чаще' ? 'сухой воздух: полив чаще' : eff(f.hum) === 'реже' ? 'влажный воздух: полив реже' : 'обычная влажность', fx(f.hum)],
+  ];
+  if (f.closed !== 1) rows.push(['Закрытый горшок', 'вода не уходит через дно', fx(f.closed)]);
+  document.getElementById('waterFactors').innerHTML = '<p class="wf-note">Каждая строка сдвигает интервал полива относительно типовых условий. «Чаще» значит меньше дней между поливами, «реже» значит больше.</p>' + rows.map(r => '<div class="wf-row"><span>' + r[0] + '<small>' + r[1] + '</small></span><b>' + r[2] + '</b></div>').join('') +
+    '<div class="wf-row total"><span>Итого<small>базовый интервал с учётом всех поправок</small></span><b>' + d + ' ' + dayWord(d) + '</b></div>';
+  if (p.tray) {
+    grid.innerHTML = '';
+    document.getElementById('waterFactors').innerHTML = '<p class="wf-note">Для хищных растений не считаем интервал: они растут во влажной почве, а вода берётся из поддона. Следите, чтобы поддон не высыхал, а вода была чистой.</p>';
+  }
+  const rulesEl = document.getElementById('waterRules');
+  rulesEl.innerHTML = '';
+  (p.tray ? p.rules : wick ? WICK_RULES : closed ? CLOSED_RULES.concat(p.rules.filter(r => !/дренаж|поддон/i.test(r))) : p.rules).forEach(r => {
+    const li = document.createElement('li');
+    li.textContent = r;
+    rulesEl.appendChild(li);
+  });
+
+  // ---- рецепт текстом ----
+  const lines = [
+    (soilType === 'min' ? 'Минеральный грунт' : 'Субстрат') + ': ' + p.name.toLowerCase() + ' (' + p.latin + '), горшок ' + volLabel(pot * 1000) + ', ' + MODES[mode].label.toLowerCase() + (wick ? ', фитильный полив' : '') + ':',
+    '',
+    ...(noMix ? ['(компоненты не выбраны)'] : []),
+    ...mix.map(c => '• ' + c.name + ': ' + pctStr(c.pct) + ' (' + volStr(pot * c.pct * 10) + ', ' + measure(pot * c.pct * 10) + ')'),
+    '',
+    p.tray ? 'Без удобрений, только чистая вода (дистиллят, дождевая, обратный осмос).' : (phOf(mix) === null ? '' : 'pH смеси около ' + phOf(mix).toFixed(1).replace('.', ',') + ' (оценка).') + (soilType === 'min' ? ' Подкормка обязательна.' : ''),
+    wick ? 'Фитильный полив: уровень воды проверять каждые ' + rg[0] + '–' + rg[1] + ' ' + dayWord(rg[1]) + '.' : 'Полив: каждые ' + rg[0] + '–' + rg[1] + ' ' + dayWord(rg[1]) + ' при ' + LIGHT_LABELS[light] + ' свете, ' + TEMP_LABELS[temp] + ' и влажности ' + HUM[hum] + '%.',
+    'Готовность: просохли ' + p.dryDepth + '.' + (closed && !wick ? ' Закрытый горшок: около 15–20% объёма горшка за полив, без пролива до стока; пока на дне стоит вода, не поливать.' : ' Пролив до дренажа, воду из поддона слить.'),
+  ];
+  document.getElementById('recipePre').textContent = lines.join('\n');
+
+  // ---- роли с текущими долями ----
+  const rolesGrid = document.getElementById('rolesGrid');
+  rolesGrid.innerHTML = '';
+  const pctById = {};
+  mix.forEach(c => pctById[c.id] = c.pct);
+  COMPONENTS.forEach(c => {
+    if (!visible(c)) return;
+    const el = document.createElement('details');
+    el.className = 'role-card';
+    el.open = openRoles.has(c.id);
+    el.addEventListener('toggle', () => { el.open ? openRoles.add(c.id) : openRoles.delete(c.id); });
+    const share = pctById[c.id];
+    const tag = (c.ev === 'data' ? ' <span class="ev ev-data">измерено</span>' : ' <span class="ev ev-prac">практика</span>');
+    if (share !== undefined) {
+      el.innerHTML = '<summary><h3>' + c.name + ' <span class="share">' + (share >= 10 ? Math.round(share) : fmt1(share)) + '%</span>' + tag + '</h3></summary><p>' + c.role + '</p>';
+    } else if ((recipeOf(p)[c.id] || 0) > 0) {
+      el.innerHTML = '<summary><h3>' + c.name + ' <span class="share off">не выбран</span>' + tag + '</h3></summary><p>' + c.role + '</p>';
+    } else {
+      el.innerHTML = '<summary><h3>' + c.name + ' <span class="share off">не для этого растения</span>' + tag + '</h3></summary><p>' + c.role + '</p>';
+    }
+    rolesGrid.appendChild(el);
+  });
+}
+
+/* =============== ВВОД =============== */
+function setPlant(id) {
+  plantId = id;
+  if (plant().tray && soilType === 'min') { setSoil('org'); }
+  if (plant().preferMin && soilType !== 'min') { setSoil('min'); autoMin = true; }
+  else if (!plant().preferMin && autoMin) { autoMin = false; setSoil('org'); }
+  document.querySelectorAll('.plant-chip').forEach(b => {
+    b.setAttribute('aria-pressed', b.dataset.plant === id ? 'true' : 'false');
+  });
+  render();
+}
+
+const press = (ids, on) => ids.forEach(i => document.getElementById(i).setAttribute('aria-pressed', i === on ? 'true' : 'false'));
+function setSoil(s) { autoMin = false; soilType = s; press(['soilOrg','soilMin'], s === 'min' ? 'soilMin' : 'soilOrg'); buildCompList(); render(); }
+function setClosed(c) { closed = c; press(['potOpen','potClosed'], c ? 'potClosed' : 'potOpen'); render(); }
+function setWick(w) { wick = w; press(['waterTop','waterWick'], w ? 'waterWick' : 'waterTop'); render(); }
+function syncPotChips() {
+  document.querySelectorAll('#potChips .plant-chip').forEach(b => b.setAttribute('aria-pressed', +b.dataset.ml === Math.round(potL * 1000) ? 'true' : 'false'));
+}
+function buildPotChips() {
+  const box = document.getElementById('potChips');
+  POTS.forEach(ml => {
+    const b = document.createElement('button');
+    b.className = 'plant-chip';
+    b.dataset.ml = ml;
+    b.textContent = volLabel(ml);
+    b.addEventListener('click', () => { potL = ml / 1000; document.getElementById('potCustom').value = ''; syncPotChips(); render(); });
+    box.appendChild(b);
+  });
+  document.getElementById('potCustom').addEventListener('input', e => {
+    const v = parseFloat(e.target.value.replace(',', '.'));
+    if (v > 0) { potL = v; syncPotChips(); render(); }
+  });
+  syncPotChips();
+}
+
+function setMode(m) {
+  mode = m;
+  ['modeDrain', 'modeBase', 'modeRetain'].forEach(id => {
+    document.getElementById(id).setAttribute('aria-pressed', 'false');
+  });
+  document.getElementById(
+    m === 'drain' ? 'modeDrain' : m === 'retain' ? 'modeRetain' : 'modeBase'
+  ).setAttribute('aria-pressed', 'true');
+  render();
+}
+
+function updateRangeFill(input) {
+  const min = +input.min, max = +input.max, val = +input.value;
+  input.style.setProperty('--fill', ((val - min) / (max - min) * 100) + '%');
+}
+
+function bindRange(id, outId, fmt) {
+  const input = document.getElementById(id);
+  const out = document.getElementById(outId);
+  input.addEventListener('input', () => {
+    if (id === 'lightLevel') light = +input.value;
+    if (id === 'tempLevel') temp = +input.value;
+    if (id === 'humLevel') hum = +input.value;
+    out.textContent = fmt(+input.value);
+    updateRangeFill(input);
+    render();
+  });
+  updateRangeFill(input);
+}
+
+const openGroups = new Set();
+function buildPlantChips() {
+  const q = document.getElementById('plantSearch').value.trim().toLowerCase();
+  const box = document.getElementById('plantChips');
+  box.innerHTML = '';
+  const list = PLANTS.filter(p => !q || (p.name + ' ' + p.latin + ' ' + (p.q || '')).toLowerCase().includes(q));
+  if (!list.length) { box.textContent = 'Такого рода пока нет в списке.'; return; }
+  const mkChip = p => {
+    const b = document.createElement('button');
+    b.className = 'plant-chip';
+    b.dataset.plant = p.id;
+    b.setAttribute('aria-pressed', p.id === plantId ? 'true' : 'false');
+    b.textContent = p.name;
+    b.addEventListener('click', () => setPlant(p.id));
+    return b;
+  };
+  const grouped = new Set(PLANT_GROUPS.flatMap(g => g.ids));
+  PLANT_GROUPS.forEach(g => {
+    const items = list.filter(p => g.ids.includes(p.id));
+    if (!items.length) return;
+    const d = document.createElement('details');
+    d.className = 'plant-group';
+    d.open = !!q || openGroups.has(g.key) || items.some(p => p.id === plantId);
+    d.addEventListener('toggle', () => { d.open ? openGroups.add(g.key) : openGroups.delete(g.key); });
+    const s = document.createElement('summary');
+    s.textContent = g.name + ' (' + items.length + ')';
+    d.appendChild(s);
+    const inner = document.createElement('div');
+    inner.className = 'plant-group-list';
+    items.forEach(p => inner.appendChild(mkChip(p)));
+    d.appendChild(inner);
+    box.appendChild(d);
+  });
+  const plain = list.filter(p => !grouped.has(p.id));
+  plain.forEach(p => box.appendChild(mkChip(p)));
+}
+
+function buildCompList() {
+  const list = document.getElementById('compList');
+  list.innerHTML = '';
+  COMPONENTS.filter(visible).forEach(c => {
+    const label = document.createElement('label');
+    label.className = 'comp';
+    label.innerHTML =
+      '<input type="checkbox" aria-label="' + c.name + '">' +
+      '<span><span class="name">' + c.name + '</span><br>' +
+      '<span class="role-tag">' + c.note + '</span></span>';
+    const cb = label.querySelector('input');
+    cb.checked = available[c.id];
+    cb.addEventListener('change', () => { available[c.id] = cb.checked; render(); });
+    list.appendChild(label);
+  });
+}
+
+function copyRecipe() {
+  const text = document.getElementById('recipePre').textContent;
+  const btn = document.getElementById('copyBtn');
+  const done = () => {
+    btn.textContent = 'Скопировано ✓';
+    setTimeout(() => (btn.textContent = 'Скопировать рецепт'), 1600);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else {
+    fallbackCopy(text, done);
+  }
+}
+function fallbackCopy(text, done) {
+  const ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand('copy'); done(); } catch (e) {}
+  document.body.removeChild(ta);
+}
+
+/* =============== ТЕМА =============== */
+(function () {
+  const t = document.querySelector('[data-theme-toggle]');
+  const r = document.documentElement;
+  let d = matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light';
+  r.setAttribute('data-theme', d);
+  const paint = () => {
+    t.innerHTML = d === 'dark'
+      ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    t.setAttribute('aria-label', d === 'dark' ? 'Включить светлую тему' : 'Включить тёмную тему');
+  };
+  paint();
+  t.addEventListener('click', () => {
+    d = d === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', d);
+    paint();
+  });
+})();
+
+/* =============== СТАРТ =============== */
+buildPlantChips();
+document.getElementById('plantSearch').addEventListener('input', buildPlantChips);
+buildPotChips();
+buildCompList();
+bindRange('lightLevel', 'lightOut', v => LIGHT_LABELS[v]);
+bindRange('tempLevel', 'tempOut', v => TEMP_LABELS[v]);
+bindRange('humLevel', 'humOut', v => HUM[v] + '%');
+render();
+</script>
+
+</body></html>
